@@ -15,10 +15,6 @@
                     @endif
 
                     You are logged in!
-
-                        <hr>
-
-                    <example-component></example-component>
                 </div>
             </div>
         </div>
