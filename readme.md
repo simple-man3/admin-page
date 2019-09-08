@@ -8,7 +8,7 @@ Simple CMS based on Laravel 6.0 framework
   * [ ] add front-end and back-end tiers
   * [ ] add plugins system
 * Front-end tier
-  * [ ] add index page
+  * [x] add index page
   * [ ] add article page
 * Back-end tier
   * [ ] add admin dashboard page
