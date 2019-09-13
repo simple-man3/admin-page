@@ -2,8 +2,8 @@
 Simple CMS based on Laravel 6.0 framework
 
 ## Table of contents
-[Installation](#Installation)
-[TODO list](#TODO-list)
+* [Installation](#Installation)
+* [TODO list](#TODO-list)
 
 ## Installation
 ### 1. Clone repository
@@ -56,6 +56,7 @@ php artisan db:seed
 * [ ] Add plugins system
 * [ ] Add themes system
 * [ ] Add marketplace app for plugins and themes (make it later)
+* [ ] Add tests
 
 
 <p align="center">Created with using <a href="https://laravel.com">Laravel Framework</a></p><br>
