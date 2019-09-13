@@ -17,10 +17,11 @@ use Faker\Generator as Faker;
 */
 
 $factory->define(Post::class, function (Faker $faker) {
+    $title = $faker->name;
     return [
-        'title' => $faker->name,
+        'title' => $title,
         'slug' => $faker->slug(4),
-        'content' => $faker->realText(),
-        'author' => 1
+        'content' => '<h1>'.$title.'</h1><p>'.$faker->realText().'</p>',
+        'author_id' => 1
     ];
 });

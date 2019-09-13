@@ -11,8 +11,14 @@
 |
 */
 
-Route::get('/', 'IndexController@index');
+// Главная страница CMS
+Route::get('/', 'PostController@index');
 
+// Маршруты авторизации / регистрации
 Auth::routes();
 
+// CRUD маршруты для статей (постов)
+Route::resource('/post', 'PostController')->middleware(['auth']);
+
+// TODO
 Route::get('/home', 'HomeController@index')->name('home');

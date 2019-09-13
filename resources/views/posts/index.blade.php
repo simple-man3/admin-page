@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Index')
+@section('title', __('Главная'))
 
 @section('content')
     <div class="container">
@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-8">
                     <div class="mb-3 d-flex justify-content-center">
-                        <a href="#" class="btn btn-primary">{{ __('Добавить новую запись') }}</a>
+                        <a href="{{ route('post.create') }}" class="btn btn-primary">{{ __('Добавить новую запись') }}</a>
                     </div>
                 </div>
                 <div class="col-4">
@@ -20,16 +20,17 @@
             <div class="col-8">
                 @if(count($posts))
                     @foreach($posts as $post)
-                        <div class="card mb-2">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ $post->title }}</h5>
-                                <h6 class="card-subtitle mb-2 text-secondary">{{ $post->Author->name }} {{ \Illuminate\Support\Carbon::createFromFormat('Y-m-d H:i:s', $post->created_at)->format('d.m.Y H:i:s') }}</h6>
-                                <div class="card-text">
-                                    {{ $post->content }}
-                                </div>
-                                <a href="#" class="card-link">{{ __('Читать статью') }}</a>
-                            </div>
-                        </div>
+                        <post-editor :read-only="true"
+                                     content="{{ $post->content }}"
+                                     title="{{ $post->title }}"
+                                     author="{{ $post->author->name }}"
+                                     created-at="{{ \Illuminate\Support\Carbon::createFromFormat('Y-m-d H:i:s', $post->created_at)->format('d.m.Y H:i:s') }}"
+                                     link="{{ route('post.show', ['post' => $post]) }}"
+                                     link-name="Читать статью"
+                                     link-edit="{{ route('post.edit', ['post' => $post]) }}"
+                                     link-delete="{{ route('post.destroy', ['post' => $post]) }}"
+                                     auth-user="{{ \Illuminate\Support\Facades\Auth::user() ? \Illuminate\Support\Facades\Auth::user()->name : '' }}"
+                        ></post-editor>
                     @endforeach
 
                     {{ $posts->links() }}
