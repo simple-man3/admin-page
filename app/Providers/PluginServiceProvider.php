@@ -30,7 +30,10 @@ class PluginServiceProvider extends ServiceProvider
                     /** @var AbstractPluginManager $plugin_manager */
                     $pm_class = $plugin->GetPluginManager();
                     $plugin_manager = new $pm_class;
-                    $plugin_manager::$plugins = array_merge($plugin_manager::$plugins, [$plugin]);
+                    $plugin_interface = $plugin_manager->GetPluginInterface();
+                    if (in_array($plugin_interface, $refelctionClass->getInterfaceNames())) {
+                        $plugin_manager::$plugins = array_merge($plugin_manager::$plugins, [$plugin]);
+                    }
                 }
             } catch (\Exception $exception) {
                 // TODO add logging and resolve error on checking php files without classes (e.g. html/blade templates)
