@@ -22,3 +22,26 @@ Route::resource('/post', 'PostController')->middleware(['auth']);
 
 // TODO
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/test', function () {
+//    dd((new \App\Library\ReflectionHelper\ReflectionHelper())->getClassFullNameFromFile(app_path('Plugins/ExampleOne/ExampleSidebarWidget.php')));
+//    dd((new ReflectionClass((new \App\Library\ReflectionHelper\ReflectionHelper())->getClassObjectFromFile(app_path('Plugins/ExampleOne/ExampleSidebarWidget.php'))))->getInterfaces());
+//    dd((new ReflectionClass((new \App\Library\ReflectionHelper\ReflectionHelper())->getClassObjectFromFile(app_path('Plugins/ExampleOne/ExampleSidebarWidget.php'))))->getMethods());
+
+//    dd((new \App\Library\PluginManagers\SidebarWidget\SidebarWidgetPluginManager())->plugins);
+//    dd((new \App\Library\PluginManagers\SidebarWidget\SidebarWidgetPluginManager())->render());
+
+    $path = app_path('Plugins');
+    $files = (new \App\Providers\PluginServiceProvider(null))->rglob($path . '/*.php');
+//    dd((new ReflectionClass((new \App\Library\ReflectionHelper\ReflectionHelper())->getClassObjectFromFile($files[0]))));
+//    dd((new ReflectionClass((new \App\Library\ReflectionHelper\ReflectionHelper())->getClassObjectFromFile($files[0])))->getParentClass()->getName());
+//    dd((new ReflectionClass((new \App\Library\ReflectionHelper\ReflectionHelper())->getClassFullNameFromFile($files[0])))->getParentClass()->getName());
+
+//    dd((new \App\Providers\PluginServiceProvider(null))->rglob($path . '/*.php'));
+//    dd((new \App\Providers\PluginServiceProvider(null))->rsearch($path, ));
+//    dd((new \App\Providers\PluginServiceProvider(null))->getDirContents($path));
+
+    (new \App\Providers\PluginServiceProvider(null))->register();
+//    dd(\App\Library\PluginManagers\SidebarWidget\SidebarWidgetPluginManager::$plugins[0]->GetRenderedWidget());
+    dd((new \App\Library\PluginManagers\SidebarWidget\SidebarWidgetPluginManager)->render());
+});
