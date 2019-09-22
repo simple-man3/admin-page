@@ -41,7 +41,10 @@ Route::get('/test', function () {
 //    dd((new \App\Providers\PluginServiceProvider(null))->rsearch($path, ));
 //    dd((new \App\Providers\PluginServiceProvider(null))->getDirContents($path));
 
-    (new \App\Providers\PluginServiceProvider(null))->register();
+//    (new \App\Providers\PluginServiceProvider(null))->register();
 //    dd(\App\Library\PluginManagers\SidebarWidget\SidebarWidgetPluginManager::$plugins[0]->GetRenderedWidget());
-    dd((new \App\Library\PluginManagers\SidebarWidget\SidebarWidgetPluginManager)->render());
+//    dd((new \App\Library\PluginManagers\SidebarWidget\SidebarWidgetPluginManager)->render());
+
+//    dd(\App\Library\PluginSystem\PluginSystemManager::GetPluginByClassName(\App\Plugins\ExampleOne\ExampleSidebarWidget::class));
+    dd(\App\Library\PluginSystem\PluginSystemManager::GetPlugins());
 });

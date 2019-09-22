@@ -13,7 +13,7 @@ return [
     */
 
     'supportsCredentials' => false,
-    'allowedOrigins' => ['http://press-start-platform.test'],
+    'allowedOrigins' => [env('CORS_ALLOWED_ORIGIN_PLATFORM', 'http://localhost')],
     'allowedOriginsPatterns' => [],
     'allowedHeaders' => ['*'],
     'allowedMethods' => ['*'],

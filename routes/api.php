@@ -22,3 +22,9 @@ Route::get('status', function () {
         'status' => 'active'
     ])->toJson();
 });
+
+Route::name('plugins.')->prefix('plugins')->group(function () {
+    Route::get('list', function () {
+        return collect(\App\Library\PluginSystem\PluginSystemManager::GetPlugins())->toJson();
+    })->name('list');
+});

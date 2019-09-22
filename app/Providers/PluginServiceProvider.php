@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Library\PluginSystem\AbstractPlugin;
 use App\Library\PluginSystem\AbstractPluginManager;
+use App\Library\PluginSystem\PluginSystemManager;
 use App\Library\ReflectionHelper\ReflectionHelper;
 use Illuminate\Support\ServiceProvider;
 
@@ -33,6 +34,9 @@ class PluginServiceProvider extends ServiceProvider
                     $plugin_interface = $plugin_manager->GetPluginInterface();
                     if (in_array($plugin_interface, $refelctionClass->getInterfaceNames())) {
                         $plugin_manager::$plugins = array_merge($plugin_manager::$plugins, [$plugin]);
+                        PluginSystemManager::AddPlugin($plugin);
+                    } else {
+                        PluginSystemManager::AddPlugin($plugin, true);
                     }
                 }
             } catch (\Exception $exception) {
