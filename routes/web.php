@@ -24,27 +24,16 @@ Route::resource('/post', 'PostController')->middleware(['auth']);
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/test', function () {
-//    dd((new \App\Library\ReflectionHelper\ReflectionHelper())->getClassFullNameFromFile(app_path('Plugins/ExampleOne/ExampleSidebarWidget.php')));
-//    dd((new ReflectionClass((new \App\Library\ReflectionHelper\ReflectionHelper())->getClassObjectFromFile(app_path('Plugins/ExampleOne/ExampleSidebarWidget.php'))))->getInterfaces());
-//    dd((new ReflectionClass((new \App\Library\ReflectionHelper\ReflectionHelper())->getClassObjectFromFile(app_path('Plugins/ExampleOne/ExampleSidebarWidget.php'))))->getMethods());
-
-//    dd((new \App\Library\PluginManagers\SidebarWidget\SidebarWidgetPluginManager())->plugins);
-//    dd((new \App\Library\PluginManagers\SidebarWidget\SidebarWidgetPluginManager())->render());
+    // TODO remove this route or add middleware
+    abort(401, 'Доступно только разработчикам');
 
     $path = app_path('Plugins');
-    $files = (new \App\Providers\PluginServiceProvider(null))->rglob($path . '/*.php');
-//    dd((new ReflectionClass((new \App\Library\ReflectionHelper\ReflectionHelper())->getClassObjectFromFile($files[0]))));
-//    dd((new ReflectionClass((new \App\Library\ReflectionHelper\ReflectionHelper())->getClassObjectFromFile($files[0])))->getParentClass()->getName());
-//    dd((new ReflectionClass((new \App\Library\ReflectionHelper\ReflectionHelper())->getClassFullNameFromFile($files[0])))->getParentClass()->getName());
+    $files = (new \App\Providers\PluginServiceProvider(null))->getPluginInfoPaths($path);
+    $scheme = new \App\Library\PluginSystem\PluginInfoScheme();
+    $scheme->load($files[0]);
+//    dd($scheme);
 
-//    dd((new \App\Providers\PluginServiceProvider(null))->rglob($path . '/*.php'));
-//    dd((new \App\Providers\PluginServiceProvider(null))->rsearch($path, ));
-//    dd((new \App\Providers\PluginServiceProvider(null))->getDirContents($path));
-
-//    (new \App\Providers\PluginServiceProvider(null))->register();
-//    dd(\App\Library\PluginManagers\SidebarWidget\SidebarWidgetPluginManager::$plugins[0]->GetRenderedWidget());
-//    dd((new \App\Library\PluginManagers\SidebarWidget\SidebarWidgetPluginManager)->render());
-
-//    dd(\App\Library\PluginSystem\PluginSystemManager::GetPluginByClassName(\App\Plugins\ExampleOne\ExampleSidebarWidget::class));
+//    dd(\App\Library\PluginSystem\PluginSystemManager::GetPluginByPackage('ExampleOne'));
+//    dd(\App\Library\PluginSystem\PluginSystemManager::GetPluginsByVendor('PressStartOfficial'));
     dd(\App\Library\PluginSystem\PluginSystemManager::GetPlugins());
 });

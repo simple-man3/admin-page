@@ -17,14 +17,16 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('status', function () {
-    return collect([
-        'status' => 'active'
-    ])->toJson();
-});
+Route::post('platform-connect', 'Api\\PlatformController@connect');
 
-Route::name('plugins.')->prefix('plugins')->group(function () {
-    Route::get('list', function () {
-        return collect(\App\Library\PluginSystem\PluginSystemManager::GetPlugins())->toJson();
-    })->name('list');
+Route::middleware('platform.key')->group(function () {
+    Route::get('status', function () {
+        return collect([
+            'status' => 'active'
+        ])->toJson();
+    });
+
+    Route::name('plugins.')->prefix('plugins')->group(function () {
+        Route::get('list', 'Api\\PlatformController@pluginsList')->name('list');
+    });
 });

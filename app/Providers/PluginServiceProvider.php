@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Library\PluginSystem\AbstractPlugin;
 use App\Library\PluginSystem\AbstractPluginManager;
+use App\Library\PluginSystem\PluginInfoScheme;
 use App\Library\PluginSystem\PluginSystemManager;
 use App\Library\ReflectionHelper\ReflectionHelper;
 use Illuminate\Support\ServiceProvider;
@@ -11,6 +12,7 @@ use Illuminate\Support\ServiceProvider;
 class PluginServiceProvider extends ServiceProvider
 {
     protected $pluginsDir = 'Plugins';
+    protected $infoFileName = 'start.plugin.json';
 
     /**
      * Register services.
@@ -20,28 +22,51 @@ class PluginServiceProvider extends ServiceProvider
     public function register()
     {
         $plugins_path = app_path('Plugins');
-        $php_files = $this->rglob($plugins_path . '/*.php');
-        $reflectionHelper = new ReflectionHelper();
-        foreach ($php_files as $php_file) {
-            try {
-                $refelctionClass = new \ReflectionClass($reflectionHelper->getClassFullNameFromFile($php_file));
-                if ($refelctionClass->getParentClass()->getName() == AbstractPlugin::class) {
-                    /** @var AbstractPlugin $plugin */
-                    $plugin = $reflectionHelper->getClassObjectFromFile($php_file);
-                    /** @var AbstractPluginManager $plugin_manager */
-                    $pm_class = $plugin->GetPluginManager();
-                    $plugin_manager = new $pm_class;
-                    $plugin_interface = $plugin_manager->GetPluginInterface();
-                    if (in_array($plugin_interface, $refelctionClass->getInterfaceNames())) {
-                        $plugin_manager::$plugins = array_merge($plugin_manager::$plugins, [$plugin]);
-                        PluginSystemManager::AddPlugin($plugin);
+        $plugin_scheme_files = $this->getPluginInfoPaths($plugins_path); // Получение схем - файлов с информацией о плагинах (пакетах)
+        foreach ($plugin_scheme_files as $plugin_scheme_file) {
+            $invalid = false;
+            $scheme = new PluginInfoScheme();
+            $scheme->load($plugin_scheme_file); // Загрузка схем
+            if ($scheme->validate()) {
+                $package_path = dirname($plugin_scheme_file); // Путь к пакету (плагину)
+                $component_paths = $scheme->components; // Список компонентов пакета
+                $reflectionHelper = new ReflectionHelper();
+                foreach ($component_paths as $component_path) {
+                    $component_full_path = $package_path . '/' . $component_path; // Полный путь к компоненту
+                    if (file_exists($component_full_path)) {
+                        try {
+                            $reflectionClass = new \ReflectionClass($reflectionHelper->getClassFullNameFromFile($component_full_path));
+                        } catch (\ReflectionException $e) {
+                            $invalid = true; // Выброс исключения рефлексии
+                            continue;
+                        }
+
+                        // является ли класс компонентом (плагином) // TODO update vars' names
+                        if ($reflectionClass->getParentClass()->getName() == AbstractPlugin::class) {
+                            /** @var AbstractPlugin $plugin Компонент */
+                            $plugin = $reflectionHelper->getClassObjectFromFile($component_full_path);
+                            /** @var AbstractPluginManager $plugin_manager Класс Менеджер компонента */
+                            $pm_class = $plugin->GetPluginManager();
+                            $plugin_manager = new $pm_class;
+
+                            // Проверка компонента на соответствие заданному интерфейсу
+                            $plugin_interface = $plugin_manager->GetPluginInterface();
+                            if (in_array($plugin_interface, $reflectionClass->getInterfaceNames())) {
+                                $plugin_manager::$plugins = array_merge($plugin_manager::$plugins, [$plugin]);
+                            } else {
+                                $invalid = true; // компонент не соответствует заданному интерфейсу
+                            }
+                        }
                     } else {
-                        PluginSystemManager::AddPlugin($plugin, true);
+                        $invalid = true; // файл компонента не существует
                     }
                 }
-            } catch (\Exception $exception) {
-                // TODO add logging and resolve error on checking php files without classes (e.g. html/blade templates)
+            } else {
+                $invalid = true; // неправильная схема
             }
+
+            // Регистрация плагина в главном менеджере системы плагинов
+            PluginSystemManager::AddPlugin($scheme, $invalid);
         }
     }
 
@@ -55,43 +80,17 @@ class PluginServiceProvider extends ServiceProvider
         //
     }
 
-    // todo remove
-    // https://stackoverflow.com/questions/24783862/list-all-the-files-and-folders-in-a-directory-with-php-recursive-function/24784144
-    public function getDirContents($dir, &$results = []){
-        $files = scandir($dir);
-
-        foreach($files as $key => $value){
-            $path = realpath($dir.DIRECTORY_SEPARATOR.$value);
-            if(!is_dir($path)) {
-                $results[] = $path;
-            } else if($value != "." && $value != "..") {
-                $this->getDirContents($path, $results);
-                $results[] = $path;
-            }
-        }
-
-        return $results;
-    }
-
-    // https://stackoverflow.com/questions/17160696/php-glob-scan-in-subfolders-for-a-file
-    public function rglob($pattern, $flags = 0) {
-        $files = glob($pattern, $flags);
-        foreach (glob(dirname($pattern).'/*', GLOB_ONLYDIR|GLOB_NOSORT) as $dir) {
-            $files = array_merge($files, $this->rglob($dir.'/'.basename($pattern), $flags));
-        }
-        return $files;
-    }
-
-    // todo remove
-    // https://stackoverflow.com/questions/17160696/php-glob-scan-in-subfolders-for-a-file
-    public function rsearch($folder, $pattern) {
-        $dir = new \RecursiveDirectoryIterator($folder);
-        $ite = new \RecursiveIteratorIterator($dir);
-        $files = new \RegexIterator($ite, $pattern, \RegexIterator::GET_MATCH);
-        $fileList = [];
-        foreach($files as $file) {
-            $fileList = array_merge($fileList, $file);
-        }
-        return $fileList;
+    /**
+     * Получение всех путей схем (файлов с данными о плагине).
+     * Поиск происходить в папках пакетов (плагинов).
+     * Структура плагина такова: папка_плагинов/папка_вендора/папка_пакета/файл_схемы.
+     * Название файла схемы прописано в коде прогарммы: start.plugin.json
+     *
+     * @param string $plugins_path Путь к папке плагинов
+     * @return array|false
+     */
+    public function getPluginInfoPaths($plugins_path)
+    {
+        return glob($plugins_path . '/*/*/' . $this->infoFileName);
     }
 }

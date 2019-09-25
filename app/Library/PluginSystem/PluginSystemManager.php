@@ -17,23 +17,15 @@ class PluginSystemManager
     /**
      * Добавляет плагин в список всех плагинов
      *
-     * @param AbstractPlugin $plugin
+     * @param PluginInfoScheme $scheme
      * @param bool $invalid
-     * @throws \ReflectionException
      */
-    public static function AddPlugin(AbstractPlugin $plugin, $invalid = false)
+    public static function AddPlugin(PluginInfoScheme $scheme, $invalid = false)
     {
-        $plugin_class = (new \ReflectionClass($plugin))->getName();
-        $short_name = (new \ReflectionClass($plugin))->getShortName();
-        $plugin_manager_class = $plugin->GetPluginManager();
-
         $record = [
-            'plugin' => $plugin_class,         // класс плагина
-            'short_name' => $short_name,       // класс плагина без пространства имен
-            'type' => $plugin_manager_class,   // тип - менеджер плагина
-            'invalid' => $invalid,             // плагин не в работоспособном состоянии, но его файлы находятся в системе
+            'scheme' => $scheme,
+            'invalid' => $invalid,
         ];
-
         static::$plugins[] = $record;
     }
 
@@ -48,29 +40,36 @@ class PluginSystemManager
     }
 
     /**
-     * Возвращает плагин по названию класса
+     * Возвращает список плагинов от определенного вендора (поставщика)
      *
+     * @param string $vendor
      * @return array
      */
-    public static function GetPluginByClassName($class_name)
+    public static function GetPluginsByVendor(string $vendor)
     {
+        $list = [];
         foreach (static::$plugins as $plugin) {
-            if ($plugin['plugin'] == $class_name) {
-                return $plugin;
+            /** @var PluginInfoScheme $scheme */
+            $scheme = $plugin['scheme'];
+            if ($scheme->vendor == $vendor) {
+                $list[] = $plugin;
             }
         }
-        return null;
+        return $list;
     }
 
     /**
-     * Возвращает плагин по короткому класса (без простарнства имен)
+     * Возвращает плагин по названию пакета
      *
+     * @param string $package
      * @return array
      */
-    public static function GetPluginByShortName($short_name)
+    public static function GetPluginByPackage(string $package)
     {
         foreach (static::$plugins as $plugin) {
-            if ($plugin['short_name'] == $short_name) {
+            /** @var PluginInfoScheme $scheme */
+            $scheme = $plugin['scheme'];
+            if ($scheme->package == $package) {
                 return $plugin;
             }
         }

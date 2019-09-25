@@ -6,7 +6,7 @@
  * Time: 15:44
  */
 
-namespace App\Plugins\ExampleOne;
+namespace App\Plugins\PressStartOfficial\ExampleOne;
 
 
 use App\Library\PluginManagers\SidebarWidget\SidebarWidgetPluginInterface;
