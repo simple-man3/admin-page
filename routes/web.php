@@ -27,10 +27,14 @@ Route::get('/test', function () {
     // TODO remove this route or add middleware
     abort(401, 'Доступно только разработчикам');
 
-    $path = app_path('Plugins');
-    $files = (new \App\Providers\PluginServiceProvider(null))->getPluginInfoPaths($path);
-    $scheme = new \App\Library\PluginSystem\PluginInfoScheme();
-    $scheme->load($files[0]);
+    \App\Library\PluginSystem\PlatformManager::installPlugin('PressStartOfficial', 'ExampleOne', '0.1.1');
+    dd('done');
+//    dd(\App\Library\PluginSystem\PlatformManager::downloadPlugin('PressStartOfficial', 'ExampleOne', '0.1.1'));
+
+//    $path = app_path('Plugins');
+//    $files = (new \App\Providers\PluginServiceProvider(null))->getPluginInfoPaths($path);
+//    $scheme = new \App\Library\PluginSystem\PluginInfoScheme();
+//    $scheme->load($files[0]);
 //    dd($scheme);
 
 //    dd(\App\Library\PluginSystem\PluginSystemManager::GetPluginByPackage('ExampleOne'));

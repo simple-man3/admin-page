@@ -46,17 +46,7 @@
                 @endif
             </div>
             <div class="col-4">
-                <div class="card mb-2">
-                    <div class="card-body">
-                        {{--<h5 class="card-title">{{ __('Виджетов пока нет') }}</h5>--}}
-                        {{--@auth--}}
-                            {{--<div class="card-text">--}}
-                                {{--<a href="#" class="btn btn-primary">Кнопка добавления нового виджета</a>--}}
-                            {{--</div>--}}
-                        {{--@endauth--}}
-                        {!! (new \App\Library\PluginManagers\SidebarWidget\SidebarWidgetPluginManager())->render() !!}
-                    </div>
-                </div>
+                {!! (new \App\Library\PluginManagers\SidebarWidget\SidebarWidgetPluginManager())->render() !!}
             </div>
         </div>
     </div>
