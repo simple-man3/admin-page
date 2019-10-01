@@ -12,7 +12,7 @@
 */
 
 // Главная страница CMS
-Route::get('/', 'PostController@index');
+Route::get('/', 'PostController@index')->name('home_page');
 
 // Маршруты авторизации / регистрации
 Auth::routes();
@@ -22,3 +22,15 @@ Route::resource('/post', 'PostController')->middleware(['auth']);
 
 // TODO
 Route::get('/home', 'HomeController@index')->name('home');
+
+//Админка
+Route::group(['prefix'=>'admin','middleware'=>'auth_admin_page'],function (){
+    //Главное
+    Route::get('/main',['uses'=>'Admin\AdminController@show_main','as'=>'admin_main']);
+    //Контент
+    Route::get('/content',['uses'=>'Admin\AdminController@show_content','as'=>'admin_content']);
+    //Учетка
+    Route::get('/account',['uses'=>'Admin\AdminController@show_account','as'=>'admin_account']);
+    //Настройки
+    Route::get('/setting',['uses'=>'Admin\AdminController@show_setting','as'=>'admin_setting']);
+});
