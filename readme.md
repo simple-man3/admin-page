@@ -53,10 +53,11 @@ php artisan db:seed
 * [ ] Add admin dashboard
 * [ ] Make current editor (with its styles) more beautiful
 * [ ] Remake current editor component: separate to 2 components (view and edit)
-* [ ] Add plugins system
+* [x] Add plugins system
 * [ ] Add themes system
-* [ ] Add marketplace app for plugins and themes (make it later)
+* [x] Add marketplace app for plugins and themes (https://github.com/reenekt/press-start-platform)
 * [ ] Add tests
+* [ ] Add GitHub Page for this repository
 
 
 <p align="center">Created with using <a href="https://laravel.com">Laravel Framework</a></p><br>
