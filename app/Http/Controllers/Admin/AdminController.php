@@ -11,7 +11,6 @@ class AdminController extends Controller
 
     public function show_main()
     {
-//        dump(url());
         return view('admin_page.admin_main');
     }
 
