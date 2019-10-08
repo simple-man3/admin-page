@@ -29,7 +29,7 @@ class AuthServiceProvider extends ServiceProvider
         {
             foreach ($user->roles as $all)
             {
-                if($all->super_user==1)
+                if($all->super_user==true)
                     return true;
             }
             return false;
