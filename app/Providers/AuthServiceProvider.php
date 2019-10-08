@@ -25,6 +25,14 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::allows('show_admin_panel',function ($user)
+        {
+            foreach ($user->roles as $all)
+            {
+                if($all->super_user==1)
+                    return true;
+            }
+            return false;
+        });
     }
 }
