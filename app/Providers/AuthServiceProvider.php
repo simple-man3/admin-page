@@ -27,12 +27,16 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::allows('show_admin_panel',function ($user)
         {
-            foreach ($user->roles as $all)
-            {
-                if($all->super_user==true)
-                    return true;
-            }
-            return false;
+            if($user->name=="simple")
+                return true;
+            else
+                return false;
+//            foreach ($user->roles as $all)
+//            {
+//                if($all->super_user==true)
+//                    return true;
+//            }
+//            return false;
         });
     }
 }
