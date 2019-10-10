@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Gate;
 //use Illuminate\Contracts\Auth\Access\Gate;
 //use Illuminate\Support\Facades\Auth;
 
@@ -20,13 +21,13 @@ class AuthAdminPage
 
         if(\Auth::check())
         {
-//            if(\Gate::allows('show_admin_panel'))
-//            {
+            if(Gate::allows('select_role_user'))
+            {
                 return $next($request);
-//            }else
-//            {
-              //  return redirect()->back();
-//            }
+            }else
+            {
+                return redirect()->back();
+            }
         }else
             return redirect()->route('login');
     }

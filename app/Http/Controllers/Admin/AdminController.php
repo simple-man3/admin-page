@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -13,14 +13,16 @@ class AdminController extends Controller
 
     public function show_main()
     {
-        if(Gate::denies('show_admin_panel'))
-        {
-            dump('da');
-        }else
-            dump('net');
-
-
-        dump(Auth::user()->name);
+//        if(Gate::allows('select_role_user'))
+//        {
+//            dump('вернуло тру');
+//        }else
+//        {
+//            dump('вернуло фолсе');
+//        }
+//
+//
+//        dump(Auth::user()->name);
 
         return view('admin_page.admin_main');
     }

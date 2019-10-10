@@ -21,16 +21,12 @@
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <link rel="stylesheet" href="{{asset('font-awesome/fontawesome.css')}}">
 </head>
+
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container-fluid">
                 <div class="row">
-{{--                    <div class="col-5">--}}
-{{--                        <a class="navbar-brand" href="{{ url('/') }}">--}}
-{{--                            {{ config('app.name', 'Laravel') }}--}}
-{{--                        </a>--}}
-{{--                    </div>--}}
                     <div class="col-10 d-flex justify-content-center my-auto admin_header">
                         <a href="{{route('admin_main')}}">Админ страница</a>
                     </div>
@@ -87,4 +83,5 @@
         </main>
     </div>
 </body>
+
 </html>
