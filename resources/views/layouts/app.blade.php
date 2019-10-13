@@ -18,23 +18,25 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('font-awesome/fontawesome.css')}}">
 </head>
+
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-10 d-flex justify-content-center my-auto admin_header">
+                        <a href="{{route('admin_main')}}">Админ страница</a>
+                    </div>
+                    <div class="col-2 my-auto site_header">
+                        <a href="{{route('home_page')}}">Сайт</a>
+                    </div>
+                </div>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -72,9 +74,14 @@
             </div>
         </nav>
 
+        <!--Админка-->
+        <div class="admin">
+            @yield('admin_page')
+        </div>
         <main class="py-4">
             @yield('content')
         </main>
     </div>
 </body>
+
 </html>
