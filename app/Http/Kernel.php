@@ -62,6 +62,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'platform.key' => \App\Http\Middleware\CheckPlatformKey::class,
+        'auth_admin_page'=>\App\Http\Middleware\AuthAdminPage::class,
     ];
 
     /**

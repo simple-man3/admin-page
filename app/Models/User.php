@@ -44,6 +44,11 @@ class User extends Authenticatable
 {
     use Notifiable, SoftDeletes;
 
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *

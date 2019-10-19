@@ -1,0 +1,69 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+/*Админка*/
+.admin_sidebar_panel{
+    position: fixed;
+    min-height: 100%;
+    background-color: #f1f2f7;
+    width: 14%;
+}
+
+.admin_sidebar_panel a{
+    color: #333333;
+}
+
+.admin_main, .admin_content, .admin_account, .setting{
+    padding: 10px;
+    padding-left: 25px;
+    transition: .5s;
+}
+
+.admin_another{
+    /*width: 88%;*/
+    padding-top: 10px;
+}
+
+.admin_sidebar_panel:hover a{
+    text-decoration: none;
+}
+
+.admin_sidebar_panel a:hover .admin_main{
+    transform: translateX(10px);
+
+}
+
+.admin_sidebar_panel a:hover .admin_content{
+    transform: translateX(10px);
+}
+
+.admin_sidebar_panel a:hover .admin_account{
+    transform: translateX(10px);
+}
+
+.admin_sidebar_panel a:hover .setting{
+    transform: translateX(10px);
+}
+
+/*В шапке переход в админку или на сайт*/
+.admin_header a{
+    color: #333333;
+}
+
+.site_header a{
+    color: #333333;
+}
+
+.admin_header:hover a{
+    text-decoration: none;
+}
+
+.site_header:hover a{
+    text-decoration: none;
+}
+
+.click{
+    background-color: gainsboro;
+}
+
