@@ -13,7 +13,11 @@ return [
     */
 
     'supportsCredentials' => false,
-    'allowedOrigins' => [env('CORS_ALLOWED_ORIGIN_PLATFORM', 'http://localhost')],
+    'allowedOrigins' => [
+        //TODO find better solution for both http and https
+        'http://' . env('CORS_ALLOWED_ORIGIN_PLATFORM', 'localhost'),
+        'https://' . env('CORS_ALLOWED_ORIGIN_PLATFORM', 'localhost'),
+    ],
     'allowedOriginsPatterns' => [],
     'allowedHeaders' => ['*'],
     'allowedMethods' => ['*'],
