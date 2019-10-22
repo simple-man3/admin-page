@@ -45,7 +45,7 @@
                     </div>
                 @endif
             </div>
-            <div class="col-4 wqwqwq">
+            <div class="col-4">
                 @include('widget.widget')
             </div>
         </div>
