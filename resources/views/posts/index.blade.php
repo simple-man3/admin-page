@@ -45,8 +45,8 @@
                     </div>
                 @endif
             </div>
-            <div class="col-4">
-                {!! (new \App\Library\PluginManagers\SidebarWidget\SidebarWidgetPluginManager())->render() !!}
+            <div class="col-4 wqwqwq">
+                @include('widget.widget')
             </div>
         </div>
     </div>
