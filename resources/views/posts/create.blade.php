@@ -105,18 +105,6 @@
             <div class="col-12">
                 <post-editor store-link="{{ route('post.store') }}" author="{{ Auth::user()->name }}"></post-editor>
             </div>
-{{--            <div class="col-4">--}}
-{{--                <div class="card mb-2">--}}
-{{--                    <div class="card-body">--}}
-{{--                        <h5 class="card-title">{{ __('Виджетов пока нет') }}</h5>--}}
-{{--                        @auth--}}
-{{--                            <div class="card-text">--}}
-{{--                                <a href="#" class="btn btn-primary">Кнопка добавления нового виджета</a>--}}
-{{--                            </div>--}}
-{{--                        @endauth--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
         </div>
     </div>
 @endsection
