@@ -20,17 +20,26 @@
             <div class="col-8">
                 @if(count($posts))
                     @foreach($posts as $post)
-                        <post-editor :read-only="true"
+                        <post-component
                                      content="{{ $post->content }}"
                                      title="{{ $post->title }}"
-                                     author="{{ $post->author->name }}"
-                                     created-at="{{ \Illuminate\Support\Carbon::createFromFormat('Y-m-d H:i:s', $post->created_at)->format('d.m.Y H:i:s') }}"
-                                     link="{{ route('post.show', ['post' => $post]) }}"
-                                     link-name="Читать статью"
-                                     link-edit="{{ route('post.edit', ['post' => $post]) }}"
-                                     link-delete="{{ route('post.destroy', ['post' => $post]) }}"
-                                     auth-user="{{ \Illuminate\Support\Facades\Auth::user() ? \Illuminate\Support\Facades\Auth::user()->name : '' }}"
-                        ></post-editor>
+                        >
+                            <template v-slot:before-editor>
+                                <h6 class="card-subtitle mb-2 text-secondary">{{ $post->author->name }} {{ \Illuminate\Support\Carbon::createFromFormat('Y-m-d H:i:s', $post->created_at)->format('d.m.Y H:i:s') }}</h6>
+                            </template>
+
+                            <template v-slot:after-editor>
+                                <a href="{{ route('post.show', ['post' => $post]) }}" class="card-link">Читать статью</a>
+                                @auth
+                                <a href="{{ route('post.edit', ['post' => $post]) }}" class="card-link">Редактировать</a>
+                                <form class="d-inline-block" action="{{ route('post.destroy', ['post' => $post]) }}" method="post">
+                                    @method('delete')
+                                    @csrf
+                                    <button type="submit" class="btn btn-link card-link">Удалить</button>
+                                </form>
+                                @endauth
+                            </template>
+                        </post-component>
                     @endforeach
 
                     {{ $posts->links() }}
