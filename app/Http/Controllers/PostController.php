@@ -27,17 +27,8 @@ class PostController extends Controller
         });
         $posts->setCollection($postsItems); // TODO find better solution
 
-        if(Auth::check())
-        {
-            if(Gate::allows('select_role_user'))
-            {
-                $super_user=1;
-            }
-        }
-
         return view('posts.index', [
-            'posts' => $posts,
-            'admin' => $super_user
+            'posts' => $posts
         ]);
     }
 
