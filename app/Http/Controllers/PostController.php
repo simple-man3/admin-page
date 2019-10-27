@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use DOMDocument;
+use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -17,6 +18,7 @@ class PostController extends Controller
      */
     public function index()
     {
+        $super_user=0;
         $posts = Post::orderBy('created_at', 'desc')->paginate(5);
         $postsItems = collect($posts->items());
 
@@ -25,8 +27,17 @@ class PostController extends Controller
         });
         $posts->setCollection($postsItems); // TODO find better solution
 
+        if(Auth::check())
+        {
+            if(Gate::allows('select_role_user'))
+            {
+                $super_user=1;
+            }
+        }
+
         return view('posts.index', [
             'posts' => $posts,
+            'admin' => $super_user
         ]);
     }
 
