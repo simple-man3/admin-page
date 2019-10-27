@@ -24,6 +24,7 @@ window.Vue = require('vue');
 
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('post-editor', require('./components/PostEditor.vue').default);
+Vue.component('post-component', require('./components/PostComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

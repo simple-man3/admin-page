@@ -163,9 +163,7 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $result = $post->delete();
-        return json_encode([
-            'result' => $result,
-            'redirectUrl' => route('post.index')
-        ]);
+
+        return redirect()->route('post.index');
     }
 }

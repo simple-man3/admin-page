@@ -23,6 +23,10 @@ class PluginInfoScheme
     public $scheme;
     public $package;
     public $vendor;
+    public $resources = [
+        'views' => [],
+        'migrations' => [],
+    ];
 
     public function __construct($path = null)
     {
@@ -42,6 +46,14 @@ class PluginInfoScheme
         $this->scheme = json_decode($content);
         $this->package = basename(dirname($path));
         $this->vendor = basename(dirname($path, 2));
+        if (property_exists($this->scheme, 'resources')) {
+            if (property_exists($this->scheme->resources, 'views')) {
+                $this->resources['views'] = $this->scheme->resources->views;
+            }
+            if (property_exists($this->scheme->resources, 'migrations')) {
+                $this->resources['migrations'] = $this->scheme->resources->migrations;
+            }
+        }
     }
 
     /**

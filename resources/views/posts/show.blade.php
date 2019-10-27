@@ -18,14 +18,14 @@
         @endauth
         <div class="row">
             <div class="col-12">
-                <post-editor :read-only="true"
-                             content="{{ $post->content }}"
-                             title="{{ $post->title }}"
-                             author="{{ $post->author->name }}"
-                             created-at="{{ \Illuminate\Support\Carbon::createFromFormat('Y-m-d H:i:s', $post->created_at)->format('d.m.Y H:i:s') }}"
-                             link="{{ route('post.index') }}"
-                             link-name="Назад"
-                ></post-editor>
+                <post-component
+                        content="{{ $post->content }}"
+                        title="{{ $post->title }}"
+                >
+                    <template v-slot:after-editor>
+                        <a href="{{ route('post.index') }}" class="card-link">Назад</a>
+                    </template>
+                </post-component>
             </div>
         </div>
     </div>
