@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="!readOnly" class="card mb-2">
+        <div class="card mb-2">
             <div class="card-body">
                 <div v-if="author">Автор: {{ author }}</div>
                 <div class="form-group">
@@ -10,7 +10,7 @@
                 <button @click="publish" class="btn btn-primary" :disabled="slug.length === 0">Опубликовать</button>
             </div>
         </div>
-        <div v-if="!readOnly" class="card mb-2">
+        <div class="card mb-2">
             <div class="card-body">
                 <editor-menu-bar :editor="editor" v-slot="{ commands, isActive }" >
                     <div class="menubar">
@@ -146,14 +146,9 @@
         </div>
         <div class="card mb-2">
             <div class="card-body">
-                <!--<h5 v-if="readOnly" class="card-title">{{ title }}</h5>-->
-                <h6 v-if="readOnly" class="card-subtitle mb-2 text-secondary">{{ author }} {{ createdAt }}</h6>
                 <div class="editor">
                     <editor-content class="editor__content" :editor="editor" />
                 </div>
-                <a v-if="readOnly" :href="link" class="card-link">{{ linkName }}</a>
-                <a @click="editLinkClickHandler" v-if="readOnly && authUser" :href="linkEdit" class="card-link">Редактировать</a>
-                <a @click="deleteLinkClickHandler" v-if="readOnly && authUser" :href="linkDelete" class="card-link">Удалить</a>
             </div>
         </div>
     </div>
@@ -185,6 +180,7 @@
     } from 'tiptap-extensions'
     import Doc from './Title/Doc'
     import Title from './Title/Title'
+
     export default {
         components: {
             EditorContent,
@@ -236,13 +232,6 @@
                 type: String,
                 default: () => {
                     return ''
-                }
-            },
-            readOnly: {
-                required: false,
-                type: Boolean,
-                default: () => {
-                    return false
                 }
             },
             title: {
@@ -337,7 +326,7 @@
         },
         created() {
             this.editor.setOptions({
-                editable: !this.readOnly,
+                editable: true,
             });
 
             if (this.oldSlug) {
