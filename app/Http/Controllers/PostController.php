@@ -18,7 +18,6 @@ class PostController extends Controller
      */
     public function index()
     {
-        $super_user=0;
         $posts = Post::orderBy('created_at', 'desc')->paginate(5);
         $postsItems = collect($posts->items());
 
