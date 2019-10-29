@@ -10,20 +10,8 @@ use function Psy\debug;
 
 class AdminController extends Controller
 {
-
     public function show_main()
     {
-//        if(Gate::allows('select_role_user'))
-//        {
-//            dump('вернуло тру');
-//        }else
-//        {
-//            dump('вернуло фолсе');
-//        }
-//
-//
-//        dump(Auth::user()->name);
-
         return view('admin_page.admin_main');
     }
 

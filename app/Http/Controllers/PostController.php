@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use DOMDocument;
+use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -26,7 +27,7 @@ class PostController extends Controller
         $posts->setCollection($postsItems); // TODO find better solution
 
         return view('posts.index', [
-            'posts' => $posts,
+            'posts' => $posts
         ]);
     }
 
