@@ -2,7 +2,8 @@ body{
     margin: 0;
     padding: 0;
 }
-/*Админка*/
+
+/*region Админка*/
 .admin_sidebar_panel{
     position: fixed;
     min-height: 100%;
@@ -22,7 +23,7 @@ body{
 
 .admin_another{
     /*width: 88%;*/
-    padding-top: 10px;
+    padding-top: 18px;
 }
 
 .admin_sidebar_panel:hover a{
@@ -46,7 +47,73 @@ body{
     transform: translateX(10px);
 }
 
-/*В шапке переход в админку или на сайт*/
+/*region setting*/
+.admin_radio_btn_theme{
+    display: flex;
+    justify-content: center;
+    align-items: center;}
+
+.admin_radio_btn_theme, .admin_screen_theme, .admin_name_theme, .admin_author_theme{
+    border-right: 1px solid #999999;
+}
+
+.admin_radio_btn_theme, .admin_screen_theme, .admin_name_theme, .admin_author_theme, .admin_descriptin_theme{
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.row_admin_theme{
+    display: flex;
+    flex-wrap: wrap;
+    background-color: white;
+    border-bottom: 1px solid #bcbcbc;
+    -webkit-box-shadow: 0px 0px 64px -36px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 64px -36px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 64px -36px rgba(0,0,0,0.75);
+}
+
+.btn_choose_theme{
+    margin-top: 20px;
+    border-radius: 20px;
+    background: white;
+    border: none;
+    width: 190px;
+    height: 40px;
+    -webkit-box-shadow: 0px 0px 64px -32px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 64px -32px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 64px -32px rgba(0,0,0,0.75);
+}
+
+.undefind_theme{
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin_name_col_setting, .admin_name_col_setting_start, .admin_name_col_setting_end{
+    background-color: white;
+    border-bottom: 1px solid #bcbcbc;
+    border-right: 1px solid #bcbcbc;
+    display: flex;
+    align-items: center;
+}
+
+.admin_name_col_setting_end{
+    border-right: none;
+}
+
+.row_name_col{
+    display: flex;
+    flex-wrap: wrap;
+    height: 50px;
+}
+/*endregion*/
+
+/*endregion*/
+
+
+/*region В шапке переход в админку или на сайт*/
 .admin_header a{
     color: #333333;
 }
@@ -66,4 +133,4 @@ body{
 .click{
     background-color: gainsboro;
 }
-
+/*endregion*/
