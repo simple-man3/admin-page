@@ -2,8 +2,11 @@
 
 @section('admin_setting')
     <p>
-        Выбор тем
+        Выбор тем.
     </p>
+    <div class="alert alert-info">
+        Сейчас выбрана тема <code>(DEFAULT THEME)</code>
+    </div>
     <div class="container-fluid">
         <div class="row">
             {{--отображение тем--}}
@@ -74,7 +77,7 @@
                             </tbody>
                         </table>
 
-                    {{--todo удалить или переделать использую изменения выше (кнопка выбора темы)--}}
+                        {{--todo удалить или переделать использую изменения выше (кнопка выбора темы)--}}
                         <div class="row row_name_col w-100">
                             <div class="col-1 admin_name_col_setting_start">
 
