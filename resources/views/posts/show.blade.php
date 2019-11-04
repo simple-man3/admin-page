@@ -23,7 +23,14 @@
                         title="{{ $post->title }}"
                 >
                     <template v-slot:after-editor>
-                        <a href="{{ route('post.index') }}" class="card-link">Назад</a>
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <a href="{{ route('post.index') }}" class="card-link">Назад</a>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                {!! (new \App\Library\PluginManagers\ExternalAsset\ExternalAssetPluginManager())->renderInCustomSection('share_post_section') !!}
+                            </div>
+                        </div>
                     </template>
                 </post-component>
             </div>

@@ -1,0 +1,12 @@
+{
+  "version": "0.1.0",
+  "components": [
+    "VKShareButtonAssets.php",
+    "VKShareButton.php",
+    "VKShareButtonScript.php"
+  ],
+  "resources": {
+    "views": [],
+    "migrations": []
+  }
+}
