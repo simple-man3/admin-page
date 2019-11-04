@@ -20,6 +20,9 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <link rel="stylesheet" href="{{asset('font-awesome/fontawesome.css')}}">
+
+    <!-- Plugins external assets -->
+    {!! (new \App\Library\PluginManagers\ExternalAsset\ExternalAssetPluginManager)->renderInsideHead() !!}
 </head>
 
 <body>
@@ -83,6 +86,9 @@
             @yield('content')
         </main>
     </div>
+
+    <!-- Plugins external assets -->
+    {!! (new \App\Library\PluginManagers\ExternalAsset\ExternalAssetPluginManager)->renderInEdnOfBody() !!}
 </body>
 
 </html>
