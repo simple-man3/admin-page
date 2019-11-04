@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Library\PluginManagers\ExternalAsset\ExternalAssetPluginManager;
 use App\Library\PluginSystem\AbstractPlugin;
 use App\Library\PluginSystem\AbstractPluginManager;
 use App\Library\PluginSystem\PluginInfoScheme;
@@ -22,56 +23,7 @@ class PluginServiceProvider extends ServiceProvider
      */
     public function register()
     {
-//        $plugins_path = app_path('Plugins');
-//        $plugin_scheme_files = $this->getPluginInfoPaths($plugins_path); // Получение схем - файлов с информацией о плагинах (пакетах)
-//        foreach ($plugin_scheme_files as $plugin_scheme_file) {
-//            $invalid = false;
-//            $scheme = new PluginInfoScheme();
-//            $scheme->load($plugin_scheme_file); // Загрузка схем
-//            if ($scheme->validate()) {
-//                $package_path = dirname($plugin_scheme_file); // Путь к пакету (плагину)
-//                $component_paths = $scheme->components; // Список компонентов пакета
-//                $reflectionHelper = new ReflectionHelper();
-//
-//                $this->loadPluginResources($scheme, $package_path);
-//
-//                foreach ($component_paths as $component_path) {
-//                    $component_full_path = $package_path . '/' . $component_path; // Полный путь к компоненту
-//                    if (file_exists($component_full_path)) {
-//                        try {
-//                            $reflectionClass = new \ReflectionClass($reflectionHelper->getClassFullNameFromFile($component_full_path));
-//                        } catch (\ReflectionException $e) {
-//                            $invalid = true; // Выброс исключения рефлексии
-//                            continue;
-//                        }
-//
-//                        // является ли класс компонентом (плагином) // TODO update vars' names
-//                        if ($reflectionClass->getParentClass()->getName() == AbstractPlugin::class) {
-//                            /** @var AbstractPlugin $plugin Компонент */
-//                            $plugin = $reflectionHelper->getClassObjectFromFile($component_full_path);
-//                            /** @var AbstractPluginManager $plugin_manager Класс Менеджер компонента */
-//                            $pm_class = $plugin->GetPluginManager();
-//                            $plugin_manager = new $pm_class;
-//
-//                            // Проверка компонента на соответствие заданному интерфейсу
-//                            $plugin_interface = $plugin_manager->GetPluginInterface();
-//                            if (in_array($plugin_interface, $reflectionClass->getInterfaceNames())) {
-//                                $plugin_manager::$plugins = array_merge($plugin_manager::$plugins, [$plugin]);
-//                            } else {
-//                                $invalid = true; // компонент не соответствует заданному интерфейсу
-//                            }
-//                        }
-//                    } else {
-//                        $invalid = true; // файл компонента не существует
-//                    }
-//                }
-//            } else {
-//                $invalid = true; // неправильная схема
-//            }
-//
-//            // Регистрация плагина в главном менеджере системы плагинов
-//            PluginSystemManager::AddPlugin($scheme, $invalid);
-//        }
+        //
     }
 
     /**
@@ -98,14 +50,14 @@ class PluginServiceProvider extends ServiceProvider
                     $component_full_path = $package_path . '/' . $component_path; // Полный путь к компоненту
                     if (file_exists($component_full_path)) {
                         try {
-                            $reflectionClass = new \ReflectionClass($reflectionHelper->getClassFullNameFromFile($component_full_path));
+                            $component_full_class_name = $reflectionHelper->getClassFullNameFromFile($component_full_path);
+                            $reflectionClass = new \ReflectionClass($component_full_class_name);
                         } catch (\ReflectionException $e) {
                             $invalid = true; // Выброс исключения рефлексии
                             continue;
                         }
-
                         // является ли класс компонентом (плагином) // TODO update vars' names
-                        if ($reflectionClass->getParentClass()->getName() == AbstractPlugin::class) {
+                        if (is_a($component_full_class_name, AbstractPlugin::class, true)) {
                             /** @var AbstractPlugin $plugin Компонент */
                             $plugin = $reflectionHelper->getClassObjectFromFile($component_full_path);
                             /** @var AbstractPluginManager $plugin_manager Класс Менеджер компонента */
@@ -115,7 +67,7 @@ class PluginServiceProvider extends ServiceProvider
                             // Проверка компонента на соответствие заданному интерфейсу
                             $plugin_interface = $plugin_manager->GetPluginInterface();
                             if (in_array($plugin_interface, $reflectionClass->getInterfaceNames())) {
-                                $plugin_manager::$plugins = array_merge($plugin_manager::$plugins, [$plugin]);
+                                $plugin_manager::addPlugin($plugin);
                             } else {
                                 $invalid = true; // компонент не соответствует заданному интерфейсу
                             }

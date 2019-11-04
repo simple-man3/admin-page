@@ -18,7 +18,7 @@ Route::get('/', 'PostController@index')->name('home_page');
 Auth::routes();
 
 // CRUD маршруты для статей (постов)
-Route::resource('/post', 'PostController')->middleware(['auth']);
+Route::resource('/post', 'PostController');
 
 // TODO
 Route::get('/home', 'HomeController@index')->name('home');

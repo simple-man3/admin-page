@@ -8,20 +8,20 @@
 
 namespace App\Library\PluginSystem;
 
-
+/**
+ * Class AbstractPluginManager
+ * @package App\Library\PluginSystem
+ */
 abstract class AbstractPluginManager
 {
-    /**
-     * Список подключенных плагинов
-     *
-     * @var array
-     */
-    public static $plugins = [];
-
     /**
      * Возвращает интерфейс для валидации плагинов при загрузке в менеджер плагинов
      *
      * @return string
      */
     abstract public function GetPluginInterface(): string;
+
+    abstract public static function addPlugin(AbstractPlugin $plugin);
+
+    abstract public static function getPlugins();
 }

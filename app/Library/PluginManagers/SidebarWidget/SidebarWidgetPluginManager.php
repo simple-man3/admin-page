@@ -10,9 +10,11 @@ namespace App\Library\PluginManagers\SidebarWidget;
 
 
 use App\Library\PluginSystem\AbstractPluginManager;
+use App\Library\PluginSystem\UsesPlugins;
 
 class SidebarWidgetPluginManager extends AbstractPluginManager
 {
+    use UsesPlugins;
 
     /**
      * Возвращает интерфейс для валидации плагинов при загрузке в менеджер плагинов
