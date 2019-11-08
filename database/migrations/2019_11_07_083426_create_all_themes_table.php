@@ -20,6 +20,7 @@ class CreateAllThemesTable extends Migration
             $table->string('name_theme');
             $table->string('name_author');
             $table->string('description_theme');
+            $table->boolean('use_theme');
 
             $table->timestamps();
         });

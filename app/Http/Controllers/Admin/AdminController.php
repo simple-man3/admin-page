@@ -66,6 +66,7 @@ class AdminController extends Controller
                             $all_theme->name_theme = $json_data['theme'];
                             $all_theme->name_author = $json_data['author'];
                             $all_theme->description_theme = $json_data['desc'];
+                            $all_theme->use_theme=false;
 
                             $all_theme->save();
                         }else{
@@ -87,13 +88,10 @@ class AdminController extends Controller
                     All_themes::destroy($value->id);
             }
 
-            if(!$a)
-            {
-                return view('admin_page.admin_setting',[
-                    'error'=>false,
-                    'all_themes'=>All_themes::all()
-                ]);
-            }
+            return view('admin_page.admin_setting',[
+                'error'=>false,
+                'all_themes'=>All_themes::all()
+            ]);
         }
 
         //если нет таких файлов
@@ -129,26 +127,34 @@ class AdminController extends Controller
      */
     public function change_theme(Request $request)
     {
-        // получаем название темы из запроса
-        $theme = $request->input('theme');
+        All_themes::where('use_theme',1)->update(['use_theme'=>0]);
 
-        /** @var SystemSettings|null $settings */
-        $settings = SystemSettings::where(['name' => 'theme'])->first();
-        if (!$settings) {
-            // если в БД нет настройки тем, то создаем эту настройку
-            $settings = new SystemSettings();
-            $settings->name = 'theme';
-        }
+        All_themes::where('id',$request->input('theme'))->update(['use_theme'=>1]);
 
-        // изменение значения настройки. значение является массивом, так что менять нужно только так
-        $settings_value = $settings->value;
-        $settings_value['name'] = $theme;
-        $settings->value = $settings_value;
+        return redirect()->back();
 
-        // сохранение настройки или выброс исключения при ошибке сохранения
-        $settings->saveOrFail();
 
-        // возврат к странице настроек
-        return redirect()->route('admin_setting');
+
+//        // получаем название темы из запроса
+//        $theme = $request->input('theme');
+//
+//        /** @var SystemSettings|null $settings */
+//        $settings = SystemSettings::where(['name' => 'theme'])->first();
+//        if (!$settings) {
+//            // если в БД нет настройки тем, то создаем эту настройку
+//            $settings = new SystemSettings();
+//            $settings->name = 'theme';
+//        }
+//
+//        // изменение значения настройки. значение является массивом, так что менять нужно только так
+//        $settings_value = $settings->value;
+//        $settings_value['name'] = $theme;
+//        $settings->value = $settings_value;
+//
+//        // сохранение настройки или выброс исключения при ошибке сохранения
+//        $settings->saveOrFail();
+//
+//        // возврат к странице настроек
+//        return redirect()->route('admin_setting');
     }
 }

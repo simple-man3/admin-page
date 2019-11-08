@@ -35,8 +35,8 @@
                                     @csrf
                                     {{--todo подставлять значение в value--}}
                                     {{--DONE--}}
-                                    <input type="hidden" name="theme" value="{{$all->name_theme}}">
-                                    <button class="btn btn-primary" type="submit">
+                                    <input type="hidden" name="theme" value="{{$all->id}}">
+                                    <button class="btn btn-primary" type="submit" @if($all->use_theme==1) disabled @endif>
                                         Выбрать тему
                                     </button>
                                 </form>

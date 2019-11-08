@@ -55,3 +55,4 @@ Route::get('/test', function () {
 //    dd(\App\Library\PluginSystem\PluginSystemManager::GetPluginsByVendor('PressStartOfficial'));
     dd(\App\Library\PluginSystem\PluginSystemManager::GetPlugins());
 });
+
