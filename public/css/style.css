@@ -68,7 +68,8 @@ body{
     .content_table{
         display: flex;
         flex-wrap: wrap;
-        border-top: 1px solid #898989;
+        border-top: 1px solid #cbcbcb;
+        padding-top: 12px;
     }
 
     .content_table .col-2{

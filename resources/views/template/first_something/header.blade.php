@@ -9,14 +9,7 @@
 </head>
 <body>
 
-{{--отображение меню для перехода в админку--}}
-@include('admin_page.head_admin_menu')
-<!--Админка-->
-<div class="admin">
-    @yield('admin_page')
-</div>
-
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, deleniti.
+Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium, distinctio?
 
 </body>
 </html>

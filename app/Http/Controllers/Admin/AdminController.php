@@ -31,6 +31,7 @@ class AdminController extends Controller
 
     public function show_setting()
     {
+        $a=true;
         $A=array();
 
         //Просматриваем, какие папки есть в папке "templete"
@@ -49,7 +50,7 @@ class AdminController extends Controller
             foreach ($A as $a)
             {
                 //Проходит по всем найденным папкам и проверет на наличие неообходимых файлов
-                if(file_exists(resource_path('/views/template/'.$a.'/description.json')) && file_exists(resource_path('/views/template/'.$a.'/screen.jpg')) && View::exists('template.'.$a.'.header'))
+                if(file_exists(resource_path('/views/template/'.$a.'/description.json')) && file_exists(public_path('/template/'.$a.'/screen.jpg')) && View::exists('template.'.$a.'.header'))
                 {
                     $json_data=json_decode(file_get_contents(resource_path("/views/template/".$a."/description.json")),true);
 
@@ -75,6 +76,7 @@ class AdminController extends Controller
                                 'description_theme'=>$json_data['desc']
                             ]);
                         }
+                        $a=false;
                     }
                 }
             }
@@ -85,16 +87,18 @@ class AdminController extends Controller
                     All_themes::destroy($value->id);
             }
 
-            return view('admin_page.admin_setting',[
-                'error'=>false,
-                'all_themes'=>All_themes::all()
-            ]);
+            if(!$a)
+            {
+                return view('admin_page.admin_setting',[
+                    'error'=>false,
+                    'all_themes'=>All_themes::all()
+                ]);
+            }
         }
 
         //если нет таких файлов
         return view('admin_page.admin_setting',[
             'error'=>true,
-
         ]);
 //        if(file_exists(resource_path('/views/template/description.json')) && View::exists('template.header') && file_exists(public_path('/img/screen.jpg')))
 //        {
