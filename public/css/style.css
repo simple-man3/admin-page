@@ -47,71 +47,54 @@ body{
     transform: translateX(10px);
 }
 
-/*region setting*/
-.admin_radio_btn_theme{
-    display: flex;
-    justify-content: center;
-    align-items: center;}
+    /*region setting*/
+    .bg_content{
+        padding: 12px;
+        border-radius: 5px;
+        background-color: white;
+        -webkit-box-shadow: 0px 0px 34px -12px rgba(0,0,0,0.75);
+        -moz-box-shadow: 0px 0px 34px -12px rgba(0,0,0,0.75);
+        box-shadow: 0px 0px 34px -12px rgba(0,0,0,0.75);
+    }
 
-.admin_radio_btn_theme, .admin_screen_theme, .admin_name_theme, .admin_author_theme{
-    border-right: 1px solid #999999;
-}
+    .name_cols{
+        padding-bottom: 12px;
+    }
 
-.admin_radio_btn_theme, .admin_screen_theme, .admin_name_theme, .admin_author_theme, .admin_descriptin_theme{
-    padding-top: 15px;
-    padding-bottom: 15px;
-}
+    .name_cols .col-2, .name_cols .col-4{
+        font-weight: bold;
+    }
 
-.row_admin_theme{
-    display: flex;
-    flex-wrap: wrap;
-    background-color: white;
-    border-bottom: 1px solid #bcbcbc;
-    -webkit-box-shadow: 0px 0px 64px -36px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 0px 64px -36px rgba(0,0,0,0.75);
-    box-shadow: 0px 0px 64px -36px rgba(0,0,0,0.75);
-}
+    .content_table{
+        display: flex;
+        flex-wrap: wrap;
+        border-top: 1px solid #898989;
+    }
 
-.btn_choose_theme{
-    margin-top: 20px;
-    border-radius: 20px;
-    background: white;
-    border: none;
-    width: 190px;
-    height: 40px;
-    -webkit-box-shadow: 0px 0px 64px -32px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 0px 64px -32px rgba(0,0,0,0.75);
-    box-shadow: 0px 0px 64px -32px rgba(0,0,0,0.75);
-}
+    .content_table .col-2{
+        min-height: 100px;
+    }
 
-.undefind_theme{
-    height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+    .btn_theme, .logo_theme{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-.admin_name_col_setting, .admin_name_col_setting_start, .admin_name_col_setting_end{
-    background-color: white;
-    border-bottom: 1px solid #bcbcbc;
-    border-right: 1px solid #bcbcbc;
-    display: flex;
-    align-items: center;
-}
+    .logo_theme>img{
+        width: 100%;
+    }
 
-.admin_name_col_setting_end{
-    border-right: none;
-}
+    .name_theme, .name_author, .description_theme{
+        padding-top: 10px;
+    }
 
-.row_name_col{
-    display: flex;
-    flex-wrap: wrap;
-    height: 50px;
-}
-/*endregion*/
+    .undefind_theme{
+        text-align: center;
+    }
+    /*endregion*/
 
 /*endregion*/
-
 
 /*region В шапке переход в админку или на сайт*/
 .admin_header a{

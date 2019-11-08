@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use File;
 use App\Models\SystemSettings;
 use Illuminate\Support\Facades\Gate;
 use App\Models\All_themes;
