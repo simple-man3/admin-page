@@ -9,7 +9,9 @@
 </head>
 <body>
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium, distinctio?
+@include('admin_page.head_admin_menu')
+
+second theme
 
 </body>
 </html>

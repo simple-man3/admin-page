@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\All_themes;
 use App\Models\Post;
 use DOMDocument;
 use Gate;
@@ -24,6 +25,13 @@ class PostController extends Controller
      */
     public function index()
     {
+        $user_theme=All_themes::where('use_theme',1)->first();
+
+        if($user_theme!=null)
+        {
+            return view('template.'.$user_theme->name_dir.'.header');
+        }
+
         $posts = Post::orderBy('created_at', 'desc')->paginate(5);
         $postsItems = collect($posts->items());
 
