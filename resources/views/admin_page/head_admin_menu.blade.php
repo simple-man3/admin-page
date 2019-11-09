@@ -1,25 +1,3 @@
-<style>
-    .admin_header a{
-        color: #333333;
-    }
-
-    .site_header a{
-        color: #333333;
-    }
-
-    .admin_header:hover a{
-        text-decoration: none;
-    }
-
-    .site_header:hover a{
-        text-decoration: none;
-    }
-
-    .click{
-        background-color: gainsboro;
-    }
-</style>
-
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
     <div class="container-fluid">
         @if(Gate::allows('select_role_user'))

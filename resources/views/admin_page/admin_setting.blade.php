@@ -43,6 +43,7 @@
                             </div>
                             <div class="col-2 logo_theme">
                                 <img class="img-fluid" src="{{asset('template/'.$all->name_dir.'/screen.jpg')}}" alt="img">
+{{--                                <img class="img-fluid" src="{{asset('resources/views/template/first_something/screen.jpg')}}" alt="img">--}}
                             </div>
                             <div class="col-2 name_theme">
                                 {{$all->name_theme}}
