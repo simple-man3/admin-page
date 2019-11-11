@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\All_themes;
 use App\Models\SystemSettings;
 use Illuminate\Support\ServiceProvider;
 
@@ -48,10 +49,16 @@ class AppServiceProvider extends ServiceProvider
         $theme = $this->defaultTheme;
 
         /** @var SystemSettings|null $settings */
-        $settings = SystemSettings::where(['name' => 'theme'])->first();
-        if ($settings) {
-            $theme = $settings->value['name'];
+//        $settings = SystemSettings::where(['name' => 'theme'])->first();
+        $user_theme = All_themes::where(['use_theme',1])->first();
+        if ($user_theme) {
+            return $user_theme->name_dir;
+
+//            $theme = $settings->value['name'];
         }
+//        if ($settings) {
+//            $theme = $settings->value['name'];
+//        }
 
         return $theme;
     }

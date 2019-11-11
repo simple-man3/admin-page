@@ -31,38 +31,37 @@ class AdminController extends Controller
 
     public function show_setting()
     {
-        $a=true;
-        $A=array();
+        $all_dir_in_template=array();
 
         //Просматриваем, какие папки есть в папке "templete"
         $dir = opendir(resource_path('/views/template'));
         while($file = readdir($dir)) {
             if($file!="." && $file!="..")
             {
-                //Запихивает в массив $A найденные папки
-                array_push($A,$file);
+                //Запихивает в массив $all_dir_in_template найденные папки
+                array_push($all_dir_in_template,$file);
             }
         }
 
         //Если в папке "template" всё таки есть папки
-        if(count($A)>0)
+        if(count($all_dir_in_template)>0)
         {
-            foreach ($A as $a)
+            foreach ($all_dir_in_template as $user_template)
             {
                 //Проходит по всем найденным папкам и проверет на наличие неообходимых файлов
-                if(file_exists(resource_path('/views/template/'.$a.'/description.json')) && file_exists(public_path('/template/'.$a.'/screen.jpg')) && View::exists('template.'.$a.'.header'))
+                if(file_exists(resource_path('/views/template/'.$user_template.'/description.json')) && file_exists(public_path('/template/'.$user_template.'/screen.jpg')) && View::exists('template.'.$user_template.'.header'))
                 {
-                    $json_data=json_decode(file_get_contents(resource_path("/views/template/".$a."/description.json")),true);
+                    $json_data=json_decode(file_get_contents(resource_path("/views/template/".$user_template."/description.json")),true);
 
                     //Если в json есть необходимые поля
                     if(array_key_exists('theme',$json_data) && array_key_exists('author',$json_data) && array_key_exists('desc',$json_data))
                     {
                         //Проевряет на наличие уже созданной строки в таблице по аттрибуту "name_dir"
-                        $all_theme = All_themes::where('name_dir', $a)->first();
+                        $all_theme = All_themes::where('name_dir', $user_template)->first();
                         if ($all_theme == null) {
                             //Если нет такой темы, то записывается в таблицу
                             $all_theme = new All_themes;
-                            $all_theme->name_dir = $a;
+                            $all_theme->name_dir = $user_template;
                             $all_theme->name_theme = $json_data['theme'];
                             $all_theme->name_author = $json_data['author'];
                             $all_theme->description_theme = $json_data['desc'];
@@ -77,14 +76,13 @@ class AdminController extends Controller
                                 'description_theme'=>$json_data['desc']
                             ]);
                         }
-                        $a=false;
                     }
                 }
             }
             //Проверят, а были удалены некоторые темы, если да, то удаляет эту тему в таблице
             foreach (All_themes::all() as $value)
             {
-                if(!in_array($value->name_dir,$A))
+                if(!in_array($value->name_dir,$all_dir_in_template))
                     All_themes::destroy($value->id);
             }
 
@@ -98,24 +96,6 @@ class AdminController extends Controller
         return view('admin_page.admin_setting',[
             'error'=>true,
         ]);
-//        if(file_exists(resource_path('/views/template/description.json')) && View::exists('template.header') && file_exists(public_path('/img/screen.jpg')))
-//        {
-//            $json_data=json_decode(file_get_contents(resource_path("/views/template/description.json")),true);
-//
-//            if(array_key_exists('theme',$json_data) && array_key_exists('author',$json_data) && array_key_exists('desc',$json_data))
-//            {
-//                return view('admin_page.admin_setting',[
-//                    'name_theme'=>$json_data['theme'],
-//                    'name_author'=>$json_data['author'],
-//                    'description'=>$json_data['desc'],
-//                    'error'=>false
-//                ])->theme(); // применение темы к данному view. если тема не указана напрямую, то берется значение из БД (если нет и в БД, то берется значение default_theme)
-//            }
-//        }
-//        //если нет таких файлов
-//        return view('admin_page.admin_setting',[
-//            'error'=>true
-//        ]);
     }
 
     /**
@@ -132,29 +112,5 @@ class AdminController extends Controller
         All_themes::where('id',$request->input('theme'))->update(['use_theme'=>1]);
 
         return redirect()->back();
-
-
-
-//        // получаем название темы из запроса
-//        $theme = $request->input('theme');
-//
-//        /** @var SystemSettings|null $settings */
-//        $settings = SystemSettings::where(['name' => 'theme'])->first();
-//        if (!$settings) {
-//            // если в БД нет настройки тем, то создаем эту настройку
-//            $settings = new SystemSettings();
-//            $settings->name = 'theme';
-//        }
-//
-//        // изменение значения настройки. значение является массивом, так что менять нужно только так
-//        $settings_value = $settings->value;
-//        $settings_value['name'] = $theme;
-//        $settings->value = $settings_value;
-//
-//        // сохранение настройки или выброс исключения при ошибке сохранения
-//        $settings->saveOrFail();
-//
-//        // возврат к странице настроек
-//        return redirect()->route('admin_setting');
     }
 }
