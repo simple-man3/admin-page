@@ -49,8 +49,6 @@ class AppServiceProvider extends ServiceProvider
     {
         $theme = $this->defaultTheme;
 
-        /** @var SystemSettings|null $settings */
-
         $user_theme = All_themes::where(['use_theme'=>1])->first();
         if ($user_theme) {
             return $user_theme->name_dir;
