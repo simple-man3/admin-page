@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\All_themes;
 use App\Models\Post;
 use DOMDocument;
 use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Response;
 
 class PostController extends Controller
 {
@@ -33,7 +35,7 @@ class PostController extends Controller
 
         return view('posts.index', [
             'posts' => $posts
-        ]);
+        ])->theme();
     }
 
     /**
@@ -43,7 +45,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        return view('posts.create')->theme();
     }
 
     /**
@@ -94,7 +96,7 @@ class PostController extends Controller
     {
         return view('posts.show', [
             'post' => $post,
-        ]);
+        ])->theme();
     }
 
     /**
@@ -107,7 +109,7 @@ class PostController extends Controller
     {
         return view('posts.edit', [
             'post' => $post
-        ]);
+        ])->theme();
     }
 
     /**

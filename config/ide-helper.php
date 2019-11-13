@@ -13,7 +13,7 @@ return array(
 
     'filename'  => '_ide_helper',
     'format'    => 'php',
-    
+
     'meta_filename' => '.phpstorm.meta.php',
 
     /*
@@ -81,6 +81,7 @@ return array(
 
     'model_locations' => array(
         'app',
+        'app/Models',
     ),
 
 

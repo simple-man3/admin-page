@@ -33,6 +33,8 @@ Route::group(['prefix'=>'admin','middleware'=>'auth_admin_page'],function (){
     Route::get('/account',['uses'=>'Admin\AdminController@show_account','as'=>'admin_account']);
     //Настройки
     Route::get('/setting',['uses'=>'Admin\AdminController@show_setting','as'=>'admin_setting']);
+
+    Route::post('/setting/theme/change', 'Admin\AdminController@change_theme')->name('admin.settings.change_theme');
 });
 
 Route::get('/test', function () {
@@ -53,3 +55,4 @@ Route::get('/test', function () {
 //    dd(\App\Library\PluginSystem\PluginSystemManager::GetPluginsByVendor('PressStartOfficial'));
     dd(\App\Library\PluginSystem\PluginSystemManager::GetPlugins());
 });
+
