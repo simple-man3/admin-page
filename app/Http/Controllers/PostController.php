@@ -25,8 +25,6 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('header')->theme();
-
         $posts = Post::orderBy('created_at', 'desc')->paginate(5);
         $postsItems = collect($posts->items());
 
@@ -37,7 +35,7 @@ class PostController extends Controller
 
         return view('posts.index', [
             'posts' => $posts
-        ]);
+        ])->theme();
     }
 
     /**

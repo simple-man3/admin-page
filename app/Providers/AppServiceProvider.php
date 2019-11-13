@@ -37,10 +37,11 @@ class AppServiceProvider extends ServiceProvider
             /** @var \Illuminate\View\View $view */
             $view = $this;
 
-            if (!view()->exists($theme . '.' . $view->name())) {
+            if (!view()->exists('template.'.$theme . '.' . $view->name())) {
                 return $view;
             }
-            return  view($theme . '.' . $view->name(), $view->getData());
+
+            return  view('template.' . $theme . '.' . $view->name(), $view->getData());
         });
     }
 
@@ -49,16 +50,11 @@ class AppServiceProvider extends ServiceProvider
         $theme = $this->defaultTheme;
 
         /** @var SystemSettings|null $settings */
-//        $settings = SystemSettings::where(['name' => 'theme'])->first();
-        $user_theme = All_themes::where(['use_theme',1])->first();
+
+        $user_theme = All_themes::where(['use_theme'=>1])->first();
         if ($user_theme) {
             return $user_theme->name_dir;
-
-//            $theme = $settings->value['name'];
         }
-//        if ($settings) {
-//            $theme = $settings->value['name'];
-//        }
 
         return $theme;
     }
