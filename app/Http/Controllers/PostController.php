@@ -45,7 +45,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        return view('posts.create')->theme();
     }
 
     /**
@@ -96,7 +96,7 @@ class PostController extends Controller
     {
         return view('posts.show', [
             'post' => $post,
-        ]);
+        ])->theme();
     }
 
     /**
@@ -109,7 +109,7 @@ class PostController extends Controller
     {
         return view('posts.edit', [
             'post' => $post
-        ]);
+        ])->theme();
     }
 
     /**
