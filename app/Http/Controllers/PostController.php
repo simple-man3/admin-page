@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
 use App\Models\All_themes;
 use App\Models\Post;
 use DOMDocument;
@@ -33,9 +34,14 @@ class PostController extends Controller
         });
         $posts->setCollection($postsItems); // TODO find better solution
 
-        return view('posts.index', [
+//        return view('posts.index', [
+//            'posts' => $posts
+//        ])->theme();
+
+        //Собственно тут и вызывается helper "usingtheme"
+        return view(Helper::usingtheme().'posts.index',[
             'posts' => $posts
-        ])->theme();
+        ]);
     }
 
     /**

@@ -1,0 +1,86 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: #333;
+    /*text-shadow: 0 0.05rem 0.1rem rgba(0, 0, 0, .5);*/
+    box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
+    height: 100vh;
+}
+
+/*region head*/
+.logo_text{
+    font-size: 28px;
+    color: white;
+    font-weight: 500;
+}
+
+.menu{
+    align-items: center;
+}
+
+.menu ul{
+    display: inline-flex;
+}
+
+.menu li{
+    list-style-type: none;
+    margin-right: 20px;
+}
+
+.menu li:hover{
+    border-bottom: 3px solid white;
+}
+
+.menu a{
+    color: rgba(255, 255, 255, .5);;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.menu .active{
+    border-bottom: 3px solid white;
+}
+
+.active a{
+    color: white;
+}
+/*endregion*/
+
+/*region content*/
+.wrap{
+    height: 75vh;
+}
+
+.wrap a{
+    background: white;
+    padding: .75rem 1.25rem;
+    color: #333;
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+.wrap>div{
+    height: fit-content;
+}
+
+.title{
+    font-size: 40px;
+    color: white;
+    font-weight: 500;
+}
+
+.description{
+    font-size: 19px;
+    color: white;
+    font-weight: 300;
+}
+/*endregion*/
+
+/*region footer*/
+footer{
+    height: 9vh;
+    align-items: flex-end;
+    color: #7d7d7d;
+}
+/*endregion*/

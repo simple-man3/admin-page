@@ -11,12 +11,16 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <!-- Styles -->
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    {{--User style--}}
+    <link rel="stylesheet" href="{{asset('css/user_style.css')}}">
+    <link rel="stylesheet" href="{{assert('css/bootstrap.css')}}">
+
 </head>
 <body>
 
 @include('admin_page.head_admin_menu')
 
-second theme
+@yield('content')
 
 </body>
 </html>
