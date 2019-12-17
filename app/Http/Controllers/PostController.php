@@ -34,12 +34,8 @@ class PostController extends Controller
         });
         $posts->setCollection($postsItems); // TODO find better solution
 
-//        return view('posts.index', [
-//            'posts' => $posts
-//        ])->theme();
 
-        //Собственно тут и вызывается helper "usingtheme"
-        return view(Helper::usingtheme().'posts.index',[
+        return view(Helper::usingTheme().'posts.index',[
             'posts' => $posts
         ]);
     }
