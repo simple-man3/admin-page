@@ -1,4 +1,5 @@
-<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+@if(Auth::check())
+    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
     <div class="container-fluid">
         @if(Gate::allows('select_role_user'))
             <div class="row">
@@ -48,3 +49,4 @@
         </div>
     </div>
 </nav>
+@endif

@@ -129,9 +129,12 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'title' => [
+            'required' => 'Введите название',
         ],
+        'content'=>[
+            'required' => 'Введите контент',
+        ]
     ],
 
     /*

@@ -24,19 +24,39 @@ Route::resource('/post', 'PostController');
 Route::get('/home', 'HomeController@index')->name('home');
 
 //Админка
-Route::group(['prefix'=>'admin','middleware'=>'auth_admin_page'],function (){
-    //Пользователь хочет авторизироваться
-    Route::get('/');
-    //Главное
-    Route::get('/main',['uses'=>'Admin\AdminController@show_main','as'=>'admin_main']);
-    //Контент
-    Route::get('/content',['uses'=>'Admin\AdminController@show_content','as'=>'admin_content']);
-    //Учетка
-    Route::get('/account',['uses'=>'Admin\AdminController@show_account','as'=>'admin_account']);
-    //Настройки
-    Route::get('/setting',['uses'=>'Admin\AdminController@show_setting','as'=>'admin_setting']);
+Route::group(['prefix'=>'admin','middleware'=>'auth_admin_page','namespace'=>'Admin'],function (){
 
-    Route::post('/setting/theme/change', 'Admin\AdminController@change_theme')->name('admin.settings.change_theme');
+    //Пользователь хочет авторизироваться
+    Route::get('/',['uses'=>'AdminController@index']);
+    //Главное
+    Route::get('/main',['uses'=>'AdminController@show_main','as'=>'admin_main']);
+
+    //region Контент
+        Route::group(['prefix'=>'content'],function (){
+
+            //Отображает список категорий
+            Route::get('/add_content',['uses'=>'AdminController@displayFormAddContent','as'=>'list_categories']);
+
+            //Отображает список контента в зависимости от категории
+            Route::get('/add_content/add/{id}',['uses'=>'AdminController@displayAllContent','as'=>'list_content']);
+
+            //Отображение формы добавления контента
+            Route::get('/display_from/{id}',['uses'=>'AdminController@displayFormContent','as'=>'from_add_content']);
+
+            //Добавление контента по нажатию кнопки
+            Route::post('/display_from/add/{id}',['uses'=>'AdminController@addContent','as'=>'add_content']);
+
+            //Добавление категории с помощью ajax
+            Route::post('/add_content/add_category',['uses'=>'AdminController@addContent']);
+        });
+    //endregion
+
+    //Учетка
+    Route::get('/account',['uses'=>'AdminController@show_account','as'=>'admin_account']);
+    //Настройки
+    Route::get('/setting',['uses'=>'AdminController@show_setting','as'=>'admin_setting']);
+
+    Route::post('/setting/theme/change', 'AdminController@change_theme')->name('admin.settings.change_theme');
 });
 
 Route::get('/test', function () {

@@ -176,7 +176,6 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\PluginServiceProvider::class,
         Barryvdh\Cors\ServiceProvider::class,
-
     ],
 
     /*

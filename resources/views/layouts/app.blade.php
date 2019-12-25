@@ -9,8 +9,14 @@
 
     <title>@yield('title', config('app.name', 'Laravel')) | {{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
+    <!-- System script -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{asset('js/jquery.js')}}"></script>
+    <script src="{{ asset('js/systems_script.js') }}"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/16.0.0/classic/ckeditor.js"></script>
+
+    {{--meta--}}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
@@ -20,17 +26,12 @@
 </head>
 
 <body>
-    <div id="app">
-        {{--отображение меню для перехода в админку--}}
-        @include('admin_page.head_admin_menu')
-        <!--Админка-->
-        <div class="admin">
-            @yield('admin_page')
-        </div>
-        <main class="py-4">
-            @yield('content')
-        </main>
-    </div>
+    {{--отображение меню для перехода в админку--}}
+    @include('admin_page.head_admin_menu')
+    <!--Админка-->
+    @yield('admin_page')
+
+    @yield('content')
 
     <!-- Plugins external assets -->
     {!! (new \App\Library\PluginManagers\ExternalAsset\ExternalAssetPluginManager)->renderInEdnOfBody() !!}

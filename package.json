@@ -25,6 +25,8 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "ckeditor4": "^4.13.1",
+        "ckeditor4-angular": "^1.0.1",
         "tiptap": "^1.25.0",
         "tiptap-extensions": "^1.27.0"
     }
