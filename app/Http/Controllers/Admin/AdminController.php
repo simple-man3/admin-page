@@ -27,11 +27,11 @@ class AdminController extends Controller
         return view('admin_page.admin_main');
     }
 
-    public function displayFormAddContent()
+    public function displayListCategories()
     {
-        $categories = Category::all(['id', 'name', 'active']);
+        $aRcategories = Category::paginate(15);
 
-        return view('admin_page.content.display_all_categories', compact('categories'));
+        return view('admin_page.content.display_all_categories', compact('aRcategories'));
     }
 
     public function show_account()
@@ -120,27 +120,21 @@ class AdminController extends Controller
 
     public function displayAllContent($id)
     {
-        $aRSelected_category = Category::where('id',$id)->first()->content;
+        $aRSelected_category = Category::where('id',$id)->first()->content()->paginate(20);
 
         return view('admin_page.content.list_content', compact('aRSelected_category','id'));
     }
 
-//    public function addContent(Request $request)
-//    {
-//        //Сохраняет новую категорию
-//        $category = new Category;
-//        $category->name = $request->input('category_name');
-//        $category->save();
-//
-//        //Получает последний id в таблице "categories"
-//        $last_row = Category::orderBy('id', 'desc')->first();
-//
-//        //Записывает данные в переменную
-//        $arResult = "";
-//        $arResult .= "<option>" . $last_row->name . "</option>";
-//
-//        echo json_encode($arResult);
-//    }
+    public function addCategory(Request $request)
+    {
+        //Сохраняет новую категорию
+        $category = new Category;
+        $category->name = $request->input('category_name');
+        $category->active = true;
+        $category->save();
+
+        return redirect()->back();
+    }
 
     public function displayFormContent($id)
     {
@@ -158,5 +152,135 @@ class AdminController extends Controller
         $category->content()->save($content);
 
         return redirect()->route('list_content',$id);
+    }
+
+    public function detailContent($idCategory,$idContent)
+    {
+        $id=$idCategory;
+        $arContent=Content::where('id',$idContent)->first();
+
+        return view('admin_page.content.detail_content',compact('arContent','id'));
+    }
+
+    public function updateContent(ValidationRequest $request, $idCategory, $idContent)
+    {
+        if($request->input('checkbox'))
+        {
+            Content::where('id',$idContent)->update([
+                'title'  =>$request->input('title'),
+                'active'  =>true,
+                'content'=>$request->input('content')
+            ]);
+        }else{
+            Content::where('id',$idContent)->update([
+                'title'  =>$request->input('title'),
+                'active'  =>false,
+                'content'=>$request->input('content')
+            ]);
+        }
+
+        return redirect()->route('list_content',$idCategory);
+    }
+
+    public function actionListElements(Request $request, $id)
+    {
+        //Создаем массив, который будет хранить все checkbox
+        $arRequestCheckbox = array();
+
+        $action=$request->input('option_action');
+        $input = $request->except(['_token','option_action']);
+
+        //Проходим по всему $input с целью разделить checkbox_3 на [checkbox][3]
+        //и запихиваем число в заранее созданный массив
+        foreach ($input as $key=>$value)
+        {
+            $pieces = explode("_", $key);
+
+            array_push($arRequestCheckbox,$pieces[1]);
+        }
+
+        if($action=='Активировать')
+        {
+            foreach ($arRequestCheckbox as $arItem)
+            {
+                Content::where('id',$arItem)->update(['active'=>true]);
+            }
+        }
+        elseif($action=='Деактивировать')
+        {
+            foreach ($arRequestCheckbox as $arItem)
+            {
+                Content::where('id',$arItem)->update(['active'=>false]);
+            }
+        }
+        else
+        {
+            foreach ($arRequestCheckbox as $arItem)
+            {
+                //Удаляет строку в связанной таблице
+                $category = Category::find($id);
+                $content_id = Content::find($arItem)->id;
+                $category->content()->detach($content_id);
+
+                //Удаляет сам контент
+                Content::destroy($arItem);
+            }
+        }
+
+        return redirect()->route('list_content',$id);
+    }
+
+    public function actionListCategories(Request $request)
+    {
+        //Создаем массив, который будет хранить все checkbox
+        $arRequestCheckbox = array();
+
+        $action=$request->input('option_action');
+        $input = $request->except(['_token','option_action']);
+
+        //Проходим по всему $input с целью разделить checkbox_3 на [checkbox][3]
+        //и запихиваем число в заранее созданный массив
+        foreach ($input as $key=>$value)
+        {
+            $pieces = explode("_", $key);
+            array_push($arRequestCheckbox,$pieces[1]);
+        }
+
+        if($action=='Активировать')
+        {
+            foreach ($arRequestCheckbox as $arItem)
+            {
+                Category::where('id',$arItem)->update(['active'=>true]);
+            }
+        }
+        elseif($action=='Деактивировать')
+        {
+            foreach ($arRequestCheckbox as $arItem)
+            {
+                Category::where('id',$arItem)->update(['active'=>false]);
+            }
+        }
+        else
+        {
+            foreach ($arRequestCheckbox as $arItem)
+            {
+                //Ищет строку с заданным id в Categories
+                $category = Category::find($arItem);
+
+                //Отображает весь контент в выбранной категории
+                foreach ($category->content as $value)
+                {
+                    //Удаляет все строки в связанной таблице, которой что то там
+                    $category->content()->detach($value->id);
+
+                    //Удаляет строку в таблице Content по заданному id
+                    Content::destroy($value->id);
+                }
+                //Удаляет строку в таблице Categories по заданному id
+                Category::destroy($arItem);
+            }
+        }
+
+        return redirect()->route('list_categories');
     }
 }

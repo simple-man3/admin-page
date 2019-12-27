@@ -20,10 +20,11 @@ body{
     color: #959595;
     display: flex;
     align-items: center;
+    position: relative;
 }
 
 .admin_content{
-    color: white;
+    color: #959595;
     cursor: pointer;
 }
 
@@ -47,11 +48,36 @@ body{
 }
 
 .admin_another{
-    padding-top: 18px;
+    padding: 18px;
 }
 
 .admin_sidebar_panel:hover a{
     text-decoration: none;
+}
+
+.click{
+    color: white!important;
+}
+/*endregion*/
+
+/*region home*/
+.link_admin_page_home:before{
+    content: "";
+    position: absolute;
+    left: 15px;
+    background-image: url('../img/not_selected/home_admin_page.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 20px;
+    width: 20px;
+}
+
+.link_admin_page_home:hover::before{
+    background-image: url('../img/selected/home_admin_page.svg');
+}
+
+.selected_home_admin_page:before{
+    background-image: url('../img/selected/home_admin_page.svg');
 }
 /*endregion*/
 
@@ -76,6 +102,7 @@ body{
 
 .add_content_from input{
     width: 100%;
+    border: 1px solid #c4c4c4;
 }
 
 .ck.ck-editor__main>.ck-editor__editable:not(.ck-focused){
@@ -145,12 +172,96 @@ body{
     align-items: center;
     padding-left: 10px;
 }
+
+.wrap_pagination{
+    padding: 15px;
+}
+
+.link_admin_page_content:before{
+    content: "";
+    position: absolute;
+    left: 15px;
+    background-image: url('../img/not_selected/contant_admin_page.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 20px;
+    width: 20px;
+}
+
+.link_admin_page_content:hover::before{
+    background-image: url('../img/selected/contant_admin_page.svg');
+}
+
+.selected_content_amin_page:before{
+    background-image: url('../img/selected/contant_admin_page.svg');
+}
+
+.wrap_title_category{
+    display: flex;
+}
+
+.wrap_title_category p{
+    width: 50%;
+}
+
+.wrap_title_category div{
+    width: 50%;
+    display: flex;
+    justify-content: flex-end
+}
+
+.wrap_ajax_form{
+    transition: .5s;
+    height: 0;
+    opacity: 0;
+}
+
+.wrap_ajax_form input[type='text']{
+    height: 41px;
+}
+
+.wrap_ajax_form input[type='submit']{
+    margin-top: 10px;
+    margin-bottom: 12px;
+}
+
+.btn_category{
+    transition: .5s;
+}
+
+.bg_detail{
+    background-color: white;
+    padding: 18px;
+    box-shadow: 0px 0px 34px -12px rgba(0,0,0,0.75);
+}
+
+.wrap_title_detail p{
+    font-weight: bold;
+}
+
+.detail_active{
+    display: flex;
+    align-items: center;
+    margin-top: 18px;
+}
+
+.detail_active p{
+    margin: 0;
+    margin-right: 10px;
+}
+
+.detail_active input[type='checkbox']{
+    width: auto;
+}
+
+.add_content_title, .add_content_content{
+    margin-top: 10px!important;
+}
 /*endregion*/
 
 /*region list_category*/
 .wrap_list_category{
     padding: 15px;
-    padding-bottom: 0;
     background: white;
     box-shadow: 0px 0px 34px -12px rgba(0,0,0,0.75);
 }
@@ -173,18 +284,126 @@ body{
     justify-content: flex-end;
 }
 
-.col_list_category .col-4{
-    height: 50px;
+.col_list_category .col-4, .col_list_category .col-1, .col_list_category .col-3{
+    min-height: 50px;
     display: flex;
     align-items: center;
+}
+
+.col_list_category .col-1{
+    justify-content: center;
 }
 
 .list_category_active p, .list_category_id p{
     font-weight: normal;
 }
 
-.list_category_name, .list_category_active, .list_category_id{
+.list_category_name, .list_category_active, .list_category_id, .list_category_tool{
     border-top: 1px solid #cbcbcb;
+    display: flex;
+    align-items: center;
+}
+
+.list_category_tool input[type='checkbox'], .main_checkbox_admin_page{
+    cursor: pointer;
+}
+
+.list_category_name a{
+    text-decoration: none!important;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.wrap_chain{
+    margin-bottom: 20px;
+}
+
+.wrap_chain a{
+    font-size:12px;
+    text-decoration: none;
+}
+
+.wrap_chain .a_category, .wrap_chain .a_content{
+    position: relative;
+    padding-right: 20px;
+    text-decoration: none;
+}
+
+.a_category:after{
+    content: "";
+    position: absolute;
+    background-image: url('../img/another_img/arrow.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    height: 8px;
+    width: 8px;
+    top: 3px;
+    right: 7px;
+}
+
+.detail_content:after{
+    content: "";
+    position: absolute;
+    background-image: url('../img/another_img/arrow.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    height: 8px;
+    width: 8px;
+    top: 3px;
+    right: 7px;
+}
+
+.wrap_chain .a_detail{
+    text-decoration: none;
+}
+
+.select_tag{
+    margin-right: 20px;
+}
+
+.select_tag select{
+    height: 41px;
+}
+
+.input_tag{
+    display: none;
+}
+
+.two_tags{
+    display: flex;
+    padding-top: 20px;
+    border-top: 1px solid #cbcbcb;
+}
+
+.disapled_two_tags{
+    height: 42px;
+    background: #dddddd;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    opacity: .3;
+}
+/*endregion*/
+
+/*region Политика безопасности*/
+.link_admin_page_security:before{
+    content: "";
+    position: absolute;
+    left: 15px;
+    background-image: url('../img/not_selected/security_admin_page.svg');
+    background-repeat: no-repeat;
+    height: 20px;
+    width: 20px;
+}
+
+.link_admin_page_security:hover::before{
+    background-image: url('../img/selected/security_admin_page.svg');
+}
+
+.selected_security_admin_page:before{
+    background-image: url('../img/selected/security_admin_page.svg');
 }
 /*endregion*/
 
@@ -258,6 +477,24 @@ body{
 .dispaly_all_category{
     padding-top: 4px;
     padding-bottom: 4px;
+}
+
+.link_admin_page_setting:before{
+    content: "";
+    position: absolute;
+    left: 15px;
+    background-image: url('../img/not_selected/settings_admin_page.svg');
+    background-repeat: no-repeat;
+    height: 20px;
+    width: 20px;
+}
+
+.link_admin_page_setting:hover::before{
+    background-image: url('../img/selected/settings_admin_page.svg');
+}
+
+.selected_setting_amin_page:before{
+    background-image: url('../img/selected/settings_admin_page.svg');
 }
 /*endregion*/
 
@@ -17323,13 +17560,23 @@ h3 {
 }
 
 .display_submenu_admin_content{
-    margin-bottom: 20px!important;
+    margin-bottom: 10px!important;
     height: auto;
     opacity: 1;
 }
 
 .change_opacity{
     opacity: 0;
+}
+
+.display_form{
+    height: 100px;
+    opacity: 1;
+}
+
+.btn_disapled{
+    background-color: #777c81;
+    border-color: #777c81;
 }
 /*endregion*/
 
@@ -17338,3 +17585,4 @@ h3 {
     color:white!important;
 }
 /*endregion*/
+

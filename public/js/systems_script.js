@@ -1,5 +1,6 @@
 $(document).ready(function () {
 
+    // Стрелка в пункте Контент
     $('.admin_content').click(function () {
         if(!$(this).hasClass('admin_content_click'))
         {
@@ -13,56 +14,54 @@ $(document).ready(function () {
         }
     });
 
+    //При нажатии на кнопку "Добавить категорию, она становится неактивной"
+    $('.btn_category').click(function () {
+        $('.wrap_ajax_form').addClass('display_form');
+        $(this).addClass('btn_disapled');
+    });
+
     // region редактор записей
-        ClassicEditor
-            .create( document.querySelector( '#editor' ) )
-            .catch( error => {
-            console.error( error );
-        } );
+    ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+        .catch( error => {
+        console.error( error );
+    } );
     // endregion
 
-    // region добавление категорий
-        $('.btn_add_category').click(function () {
-            $(this).addClass('change_opacity');
-            $('.wrap_add_category').css('display','block');
-        });
-
-        // Добавление категорий с помощью ajax
-        $('.btn_add_category_ajax').click(function () {
-            if($('.area_add_category').val())
-            {
-                $.ajax({
-                    url:"add_content/add_category",
-                    method:'post',
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    data:{
-                        category_name:$('.area_add_category').val(),
-                    },
-                    dataType:'json',
-                    success:function (data) {
-                        if(data)
-                        {
-                            console.log(data);
-                            $('.dispaly_all_category').append(data);
-                        }
-                        else
-                            console.log("net");
-                    }
-                });
-
-                success_add_category('.area_add_category');
-            }else
-            {
-                $('.area_add_category').attr('placeholder','Введите название категории!')
-            }
-        });
-
-        function success_add_category(class_)
+    //При нажатии на главную checkbox, отсальные checkbox тоже отмечаются
+    $('.main_checkbox_admin_page').click(function () {
+        if($(this).prop('checked'))
         {
-            $(class_).attr('placeholder','');
-            $(class_).val('');
+            $('.row_checkbox').prop('checked',true);
+            $('.disapled_two_tags').css('display','none');
+        }else {
+            $('.row_checkbox').prop('checked',false);
+            $('.disapled_two_tags').css('display','block');
         }
-    // endregion
+    });
+
+    // Если нажат хотя бы один checkbox, то можно выбирать действия
+    $('.row_checkbox').click(function () {
+        var variable=each_check();
+        if(variable)
+            $('.disapled_two_tags').css('display','none');
+        else
+            $('.disapled_two_tags').css('display','block');
+    });
+
+    function each_check()
+    {
+        var i=0;
+        $('.row_checkbox').each(function () {
+            if($(this).prop('checked'))
+                 i=1;
+        });
+
+        return i;
+    }
+
+    //Если chebox нажат и действие выбрано, то появляется кнопка "Применить"
+    $('.select').change(function () {
+        $('.input_tag').css('display','block');
+    });
 });
