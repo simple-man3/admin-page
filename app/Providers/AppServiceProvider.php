@@ -30,9 +30,4 @@ class AppServiceProvider extends ServiceProvider
     {
 
     }
-
-    public function getThemeFromSettings(): string
-    {
-
-    }
 }
