@@ -1,4 +1,5 @@
-<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+@if(Auth::check())
+    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
     <div class="container-fluid">
         @if(Gate::allows('select_role_user'))
             <div class="row">
@@ -6,7 +7,7 @@
                     <a href="{{route('admin_main')}}">Админ страница</a>
                 </div>
                 <div class="col-2 my-auto site_header">
-                    <a href="{{route('home_page')}}">Сайт</a>
+                    <a href="/">Сайт</a>
                 </div>
             </div>
         @endif
@@ -48,3 +49,4 @@
         </div>
     </div>
 </nav>
+@endif

@@ -8,13 +8,21 @@
     <title>Document</title>
 
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    <script src="{{asset('js/app.js')}}"></script>
+    <script src="{{asset('js/systems_script.js')}}"></script>
 
 </head>
 <body>
 
 @include('admin_page.head_admin_menu')
 
-my_template
+my_template <br>
+
+@foreach($ar as $arItem)
+    <p>
+        {{$arItem->title}}
+    </p>
+@endforeach
 
 </body>
 </html>
