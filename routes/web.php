@@ -11,8 +11,7 @@
 |
 */
 
-// Главная страница CMS
-Route::get('/', 'PostController@index')->name('home_page');
+//region system_route
 
 // Маршруты авторизации / регистрации
 Auth::routes();
@@ -81,3 +80,7 @@ Route::get('/test', function () {
     dd(\App\Library\PluginSystem\PluginSystemManager::GetPlugins());
 });
 
+//endregion
+
+// Главная страница CMS
+Route::get('/', ['uses'=>'UserController\PostController@index']);

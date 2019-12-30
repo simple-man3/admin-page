@@ -29,11 +29,18 @@ body{
 }
 
 .admin_content:after{
-    content: ">";
+    content: "";
     position: absolute;
-    transform: rotate(90deg);
+    background-image: url('../img/another_img/arrow_dowm.svg');
+    background-repeat: no-repeat;
+    height: 15px;
+    width: 13px;
+    transform: rotate(0deg);
     left: 115px;
+    top: 15px;
     transition: .5s;
+    background-position: center;
+    background-size: contain;
 }
 
 .admin_main, .admin_content, .admin_account, .setting{
@@ -255,6 +262,11 @@ body{
 }
 
 .add_content_title, .add_content_content{
+    margin-top: 10px!important;
+}
+
+.detail_date_of_creation p{
+    margin-bottom: 10px!important;
     margin-top: 10px!important;
 }
 /*endregion*/
@@ -17555,8 +17567,8 @@ h3 {
 /*endregion*/
 
 /*region js*/
-.admin_content.admin_content_click:after{
-    transform: rotate(270deg);
+.admin_content_click:after{
+    transform: rotate(180deg);
 }
 
 .display_submenu_admin_content{

@@ -7,7 +7,7 @@
                     <a href="{{route('admin_main')}}">Админ страница</a>
                 </div>
                 <div class="col-2 my-auto site_header">
-                    <a href="{{route('home_page')}}">Сайт</a>
+                    <a href="/">Сайт</a>
                 </div>
             </div>
         @endif

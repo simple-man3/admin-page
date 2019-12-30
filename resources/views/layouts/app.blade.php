@@ -9,25 +9,23 @@
 
     <title>@yield('title')</title>
 
-    <!-- System script -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{asset('js/jquery.js')}}"></script>
-    <script src="{{ asset('js/systems_script.js') }}"></script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/16.0.0/classic/ckeditor.js"></script>
-
-    {{--meta--}}
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <!-- Styles -->
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
 
     <!-- Plugins external assets -->
     {!! (new \App\Library\PluginManagers\ExternalAsset\ExternalAssetPluginManager)->renderInsideHead() !!}
+
+    <!-- System script -->
+    <script src="{{asset('js/app.js')}}"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/16.0.0/classic/ckeditor.js"></script>
+    <script src="{{asset('js/systems_script.js')}}"></script>
+
 </head>
 
 <body>
     {{--отображение меню для перехода в админку--}}
     @include('admin_page.head_admin_menu')
+
     <!--Админка-->
     @yield('admin_page')
 

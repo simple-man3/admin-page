@@ -1,5 +1,17 @@
 $(document).ready(function () {
 
+    window.onload=function () {
+        if($('.spisok_admin_content').hasClass('display_submenu_admin_content'))
+        {
+            $('.link_admin_page_content').addClass('admin_content_click');
+        }
+    };
+
+    if($('.link_admin_page_content').hasClass('admin_content_click'))
+    {
+        $('.link_admin_page_content').removeClass('admin_content_click');
+    }
+
     // Стрелка в пункте Контент
     $('.admin_content').click(function () {
         if(!$(this).hasClass('admin_content_click'))

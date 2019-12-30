@@ -47,8 +47,12 @@
                         <input type="checkbox" name="checkbox"
                                @if($arContent->active)
                                checked
-                            @endif
-                        >
+                            @endif>
+                    </div>
+                    <div class="detail_date_of_creation">
+                        <p>
+                            Создано: {{ date('d.m.Y', strtotime($arContent->created_at))}}
+                        </p>
                     </div>
                     <div>
                         <p class="add_content_title">
@@ -60,8 +64,8 @@
                         Содержимое
                     </p>
                     <textarea name="content" id="editor">
-                    {{old('content',$arContent->content)}}
-                </textarea>
+                        {{old('content',$arContent->content)}}
+                    </textarea>
                     <input class="btn btn-primary" type="submit" value="Сохранить">
                 </form>
             </div>
