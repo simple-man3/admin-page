@@ -7,10 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <!-- Styles -->
-    <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    {!! \App\Helpers\Helper::systemSet() !!}
     {{--User style--}}
     <link rel="stylesheet" href="{{asset('css/user_style.css')}}">
     <link rel="stylesheet" href="{{assert('css/bootstrap.css')}}">

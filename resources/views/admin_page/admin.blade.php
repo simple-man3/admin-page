@@ -45,15 +45,17 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="{{route('admin_account')}}" class="link_admin_page link_admin_page_security
-                                    @if(Route::current()->getName()=='admin_account')
-                                        click
-                                        selected_security_admin_page
-                                    @endif">
-                                <div class="admin_account">
-                                    Политка безопасности
-                                </div>
-                            </a>
+                            <div class="admin_account link_admin_page link_admin_page_security" style="color: #959595">
+                                Политка безопасности
+                            </div>
+                            <ul class="submenu_security_ul">
+                                <li>
+                                    <a href="{{route('admin_account')}}">Список пользователей</a>
+                                </li>
+                                <li>
+                                    <a href="{{route('all_roles')}}">Список ролей</a>
+                                </li>
+                            </ul>
                         </li>
                         <li>
                             <a href="{{route('admin_setting')}}" class="link_admin_page link_admin_page_setting
@@ -76,9 +78,16 @@
                     {{--content point admin pge--}}
                     @yield('admin_content')
                     @yield('category_list')
+                    @yield('detail_category')
                     @yield('list_contents')
                     @yield('from_add_content')
                     @yield('detail_content')
+
+                    {{--security point admin page--}}
+                    @yield('from_add_user')
+                    @yield('list_roles')
+                    @yield('detail_role')
+                    @yield('detail_user')
 
                     @yield('admin_account')
                     @yield('admin_setting')

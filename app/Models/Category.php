@@ -10,4 +10,11 @@ class Category extends Model
     {
         return $this->belongsToMany(Content::class);
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
+    protected $fillable=['name','active'];
 }

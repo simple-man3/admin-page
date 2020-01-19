@@ -45,9 +45,14 @@
                             Активность:
                         </p>
                         <input type="checkbox" name="checkbox"
-                               @if($arContent->active)
+                           @if($arContent->active)
                                checked
                             @endif>
+                    </div>
+                    <div class="user_creater detail_date_of_creation">
+                        <p>
+                            Запись создана пользователем: {{$user->login}}
+                        </p>
                     </div>
                     <div class="detail_date_of_creation">
                         <p>

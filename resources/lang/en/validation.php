@@ -129,11 +129,31 @@ return [
     */
 
     'custom' => [
-        'title' => [
-            'required' => 'Введите название',
+        'title'=>[
+            'required' => 'Введите название!',
         ],
         'content'=>[
-            'required' => 'Введите контент',
+            'required' => 'Введите контент!',
+        ],
+        'email'=>[
+            'required' => 'Введите email!',
+            'email'=>'Введите почту корректно! Пример: example@mail.com',
+            'unique'=>'Email уже используется!'
+        ],
+        'login'=>[
+            'required' => 'Введите логин!',
+            'unique' => 'Такой логин уже есть!',
+        ],
+        'password'=>[
+            'required' => 'Введите пароль!',
+            'confirmed' => 'Пароли не совпадают!',
+            'min'=>'Минимальная длина пароля :min символов!'
+        ],
+        'select_role'=>[
+            'required' => 'Выберите роль!',
+        ],
+        'name_category'=>[
+            'required'=>'Введите название категории!'
         ]
     ],
 

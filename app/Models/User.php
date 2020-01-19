@@ -49,13 +49,18 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class);
     }
 
+    public function category()
+    {
+        return $this->belongsToMany(Category::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'login', 'email', 'password','active',
     ];
 
     /**

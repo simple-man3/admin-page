@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ValidationRequest extends FormRequest
+class LoginRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class ValidationRequest extends FormRequest
      */
     public function authorize()
     {
-        return \Auth::check();
+        return true;
     }
 
     /**
@@ -24,8 +24,8 @@ class ValidationRequest extends FormRequest
     public function rules()
     {
         return [
-            'title'=>'required',
-            'content'=>'required',
+            'login'=>'required',
+            'password'=>'required'
         ];
     }
 }

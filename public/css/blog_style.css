@@ -1,0 +1,87 @@
+/*region default_set*/
+body{
+    margin: 0;
+    padding: 0;
+    background-color: white;
+}
+
+p{
+    margin: 0;
+    padding: 0;
+}
+
+ul{
+    padding: 0;
+}
+/*endregion*/
+
+/*region header*/
+.text_title{
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.top_subscribe{
+    color: #878f95;
+}
+
+.top_row{
+    border-bottom: 2px solid #f6f6f6;
+}
+
+.top_sign_up{
+    color: #6c757d;
+    border: 1px solid #6c757d;
+    padding: .25rem .5rem;
+    font-size: .875rem;
+    line-height: 1.5;
+    border-radius: .2rem;
+}
+/*endregion*/
+
+/*region menu*/
+.top_menu{
+    display: flex;
+}
+
+.top_menu li{
+    list-style-type: none;
+}
+
+.top_menu a{
+    color: #6c757d;
+}
+
+.nav_menu{
+    height: 44px;
+}
+
+.nav_menu a{
+    color: #6c757d;
+}
+/*endregion*/
+
+/*region Карусель*/
+.bg_carousel{
+    height: 360px;
+    background-color: #343a40;
+    padding: 48px;
+}
+
+.wrap_carousel_title p{
+    color: white;
+    font-size: 48px;
+    line-height: 45px;
+}
+
+.wrap_anons_text p{
+    color: white;
+    font-size: 20px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.wrap_anons_text a{
+    color: white;
+}
+/*endregion*/

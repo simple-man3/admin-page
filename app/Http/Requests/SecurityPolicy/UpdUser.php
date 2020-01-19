@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\SecurityPolicy;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ValidationRequest extends FormRequest
+class UpdUser extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,8 @@ class ValidationRequest extends FormRequest
     public function rules()
     {
         return [
-            'title'=>'required',
-            'content'=>'required',
+            'login'=>'required',
+            'email'=>'email',
         ];
     }
 }

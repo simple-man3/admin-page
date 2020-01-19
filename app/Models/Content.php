@@ -11,5 +11,5 @@ class Content extends Model
         return $this->belongsToMany(Category::class);
     }
 
-    protected $fillable=['title','active','content'];
+    protected $fillable=['title','active','content','user_id'];
 }

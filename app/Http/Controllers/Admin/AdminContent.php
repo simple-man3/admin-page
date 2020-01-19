@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\System\Category\UpdateCategory;
 use App\Http\Requests\ValidationRequest;
 use App\Models\Category;
 use App\Models\Content;
+use App\Models\User;
 use File;
 use App\Models\SystemSettings;
 use Illuminate\Support\Facades\Gate;
@@ -15,7 +17,7 @@ use Illuminate\Support\Facades\Auth;
 use View;
 use function Psy\debug;
 
-class AdminController extends Controller
+class AdminContent extends Controller
 {
     public function index()
     {
@@ -34,19 +36,39 @@ class AdminController extends Controller
         return view('admin_page.content.display_all_categories', compact('aRcategories'));
     }
 
-    public function show_account()
+    public function displayFormUpdateCategory($id)
     {
-        return view('admin_page.admin_account');
+        $arCategory=Category::find($id);
+        $arUser=$arCategory->users()->first();
+
+        return view('admin_page.content.detail_category',compact('arCategory','arUser'));
+    }
+
+    public function updateCategory(UpdateCategory $request,$id)
+    {
+        if($request->has('checkbox'))
+        {
+            Category::where('id',$id)->update(['name'=>$request->input('name_category')]);
+        }else
+            Category::where('id',$id)->update([
+                'name'=>$request->input('name_category'),
+                'active'=>false
+            ]);
+
+        return redirect()->route('list_categories');
     }
 
     public function show_setting()
     {
         $all_dir_in_template = array();
 
-        //Просматриваем, какие папки есть в папке "templete"
+        //Просматриваем, какие папки есть в папке "template"
         $dir = opendir(resource_path('/views/template'));
         while ($file = readdir($dir)) {
-            if ($file != "." && $file != "..") {
+            //Кроме созданных юзером необходимые файлы, отображаются другие, невидимые папки
+            //Исключаем ненужные папки, а нежные запихивываем в массив "array_push"
+            if ($file != "." && $file != "..")
+            {
                 //Запихивает в массив $all_dir_in_template найденные папки
                 array_push($all_dir_in_template, $file);
             }
@@ -128,10 +150,10 @@ class AdminController extends Controller
     public function addCategory(Request $request)
     {
         //Сохраняет новую категорию
-        $category = new Category;
-        $category->name = $request->input('category_name');
-        $category->active = true;
-        $category->save();
+        Auth::user()->category()->create([
+            'name'=>$request->input('category_name'),
+            'active'=>true
+        ]);
 
         return redirect()->back();
     }
@@ -147,8 +169,10 @@ class AdminController extends Controller
         $content=new Content([
             'title'=>$request->input('title'),
             'active'=>1,
-            'content'=>$request->input('content')
+            'user_id'=>15,
+            'content'=>$request->input('content'),
         ]);
+
         $category->content()->save($content);
 
         return redirect()->route('list_content',$id);
@@ -159,12 +183,15 @@ class AdminController extends Controller
         $id=$idCategory;
         $arContent=Content::where('id',$idContent)->first();
 
-        return view('admin_page.content.detail_content',compact('arContent','id'));
+        //Выбирает юзера, который создал данную запись
+        $user=$arContent->category()->first()->users()->first();
+
+        return view('admin_page.content.detail_content',compact('arContent','id','user'));
     }
 
     public function updateContent(ValidationRequest $request, $idCategory, $idContent)
     {
-        if($request->input('checkbox'))
+        if($request->has('checkbox'))
         {
             Content::where('id',$idContent)->update([
                 'title'  =>$request->input('title'),
@@ -262,6 +289,7 @@ class AdminController extends Controller
         }
         else
         {
+            //Если юзер выбрал из списка "Удалить"
             foreach ($arRequestCheckbox as $arItem)
             {
                 //Ищет строку с заданным id в Categories

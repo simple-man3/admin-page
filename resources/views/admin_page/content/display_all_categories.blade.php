@@ -45,6 +45,9 @@
                     <div class="col-1">
                         <input type="checkbox" class="main_checkbox_admin_page">
                     </div>
+                    <div class="col-1">
+
+                    </div>
                     <div class="col-4">
                         <p>
                             Название
@@ -55,11 +58,12 @@
                             Активность
                         </p>
                     </div>
-                    <div class="col-3">
+                    <div class="col-2">
                         <p>
                             ID
                         </p>
                     </div>
+
                     <div class="col-12">
                         <form method="post" action="{{route('actionListCategories')}}">
                             @csrf
@@ -67,6 +71,9 @@
                                 <div class="row" style="display: flex;flex-wrap: wrap">
                                     <div class="col-1 list_category_tool">
                                         <input name="checkbox_{{$arItem->id}}" class="row_checkbox" type="checkbox">
+                                    </div>
+                                    <div class="col-1 list_category_change_btn">
+                                        <a href="{{route('update_category',$arItem->id)}}">ИЗМЕНИТЬ</a>
                                     </div>
                                     <div class="col-4 list_category_name">
                                         <a href="{{route('list_content',$arItem->id)}}">
@@ -84,7 +91,7 @@
                                             </p>
                                         @endif
                                     </div>
-                                    <div class="col-3 list_category_id">
+                                    <div class="col-2 list_category_id">
                                         <p>
                                             {{$arItem->id}}
                                         </p>

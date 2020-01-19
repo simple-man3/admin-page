@@ -36,7 +36,8 @@ body{
     height: 15px;
     width: 13px;
     transform: rotate(0deg);
-    left: 115px;
+    /*left: 115px;*/
+    right: 40px;
     top: 15px;
     transition: .5s;
     background-position: center;
@@ -64,6 +65,26 @@ body{
 
 .click{
     color: white!important;
+}
+
+.admin_account{
+    width: 100%;
+}
+
+.admin_account:after{
+    content: "";
+    position: absolute;
+    background-image: url('../img/another_img/arrow_dowm.svg');
+    background-repeat: no-repeat;
+    height: 15px;
+    width: 13px;
+    transform: rotate(0deg);
+    /*left: 115px;*/
+    right: 40px;
+    top: 15px;
+    transition: .5s;
+    background-position: center;
+    background-size: contain;
 }
 /*endregion*/
 
@@ -131,7 +152,7 @@ body{
 
 .error_list{
     background: #ce9f9ff0;
-    width: 300px;
+    width: fit-content;
     padding: 20px;
     border-radius: 5px;
     margin-bottom: 20px;
@@ -238,6 +259,7 @@ body{
 
 .bg_detail{
     background-color: white;
+    border-radius: 5px;
     padding: 18px;
     box-shadow: 0px 0px 34px -12px rgba(0,0,0,0.75);
 }
@@ -310,7 +332,7 @@ body{
     font-weight: normal;
 }
 
-.list_category_name, .list_category_active, .list_category_id, .list_category_tool{
+.list_category_name, .list_category_active, .list_category_id, .list_category_tool, .list_category_change_btn{
     border-top: 1px solid #cbcbcb;
     display: flex;
     align-items: center;
@@ -410,12 +432,79 @@ body{
     width: 20px;
 }
 
+.link_admin_page_security{
+    cursor: pointer;
+}
+
+.link_admin_page_security:hover{
+    color: white!important;
+}
+
 .link_admin_page_security:hover::before{
     background-image: url('../img/selected/security_admin_page.svg');
 }
 
 .selected_security_admin_page:before{
     background-image: url('../img/selected/security_admin_page.svg');
+}
+
+.row_border_top{
+    border-top: 1px solid #e8e8e8;
+}
+
+.wrap_title_user_add p{
+    font-weight: bold;
+    margin-bottom: 20px!important;
+}
+
+.wrap_login p, .wrap_email p, .wrap_password p, .wrap_confirm_password p{
+    margin: 0;
+    margin-top: 10px!important;
+}
+
+.form_user input[type='text']{
+    padding-left: 4px;
+    border-radius: 5px;
+    border: 1px solid #d1d1d1;
+}
+
+.form_user input[type='submit']{
+    margin-top: 20px!important;
+}
+
+.form_user input{
+    border-radius: 5px;
+    border: 1px solid #d1d1d1;
+}
+
+.submenu_security_ul{
+    margin-bottom: 10px;
+    margin-left: 60px;
+    margin-top: 0;
+}
+
+.submenu_security_ul a{
+    color: #959595;
+}
+
+.submenu_security_ul a:hover{
+    color: white;
+}
+
+.wrap_choose_role{
+    height: 100%;
+    background-color: white;
+    padding: 18px;
+    box-shadow: 0px 0px 34px -12px rgba(0,0,0,0.75);
+    border-radius: 5px;
+}
+
+.wrap_choose_role p{
+    margin: 0;
+}
+
+.wrap_choose_role select{
+    width: 100%;
 }
 /*endregion*/
 
@@ -17598,3 +17687,63 @@ h3 {
 }
 /*endregion*/
 
+/*region null_theme*/
+.wrap_null_template{
+    height: 100vh;
+}
+
+.wrap_null_template div{
+    text-align: center;
+}
+
+.wrap_null_template p{
+    margin: 0;
+    font-size: 25px;
+}
+/*endregion*/
+
+/*region registration*/
+.wrap_system_registration{
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+    width: 728px;
+}
+
+.system_head_registration{
+    padding: 0.75rem 1.25rem;
+    background-color: rgba(0, 0, 0, 0.03);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.system_head_registration p{
+    margin: 0;
+}
+
+.wrap_registration_form{
+    padding: 1.25rem;
+}
+/*endregion*/
+
+/*region login*/
+.wrap_error_auth{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+    color: red;
+}
+/*endregion*/
+
+.logout_a{
+    color: #333333;
+}
+
+.logout_a:hover{
+    text-decoration: none;
+}
+
+.row_set{
+    display: flex;
+    flex-wrap: wrap;
+}

@@ -18,7 +18,6 @@ class AuthAdminPage
      */
     public function handle($request, Closure $next)
     {
-
         if(\Auth::check())
         {
             if(Gate::allows('select_role_user'))

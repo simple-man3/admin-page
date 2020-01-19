@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\All_themes;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
@@ -16,6 +17,11 @@ class IndexController extends Controller
      */
     public function index()
     {
-        //
+        $count_theme=All_themes::where('use_theme',true)->first();
+//        dd($count_theme);
+        if(!$count_theme==null)
+            return view('null_template.null_template');
+        else
+            return redirect()->route('homeUser');
     }
 }
