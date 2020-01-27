@@ -13,7 +13,7 @@
 <body>
 
 {{--Подключение админки--}}
-@include('admin_page.head_admin_menu')
+@include(Helper::getAdminMenu())
 
 <header>
     <div class="container">
@@ -25,29 +25,12 @@
                 </p>
             </div>
         </div>
-
-        <div class="row">
-            <div class="col-12">
-                <nav class="nav d-flex justify-content-between align-items-center nav_menu">
-                    <a href="#">World</a>
-                    <a href="#">U.S.</a>
-                    <a href="#">Technology</a>
-                    <a href="#">Design</a>
-                    <a href="#">Culture</a>
-                    <a href="#">Business</a>
-                    <a href="#">Politics</a>
-                    <a href="#">Opinion</a>
-                    <a href="#">Science</a>
-                    <a href="#">Health</a>
-                    <a href="#">Style</a>
-                    <a href="#">Travel</a>
-                </nav>
-            </div>
-        </div>
     </div>
 </header>
 
 @yield('content')
+
+@include(Helper::usingTheme('footer'))
 
 </body>
 </html>

@@ -28,6 +28,6 @@ class AuthAdminPage
                 return redirect()->back();
             }
         }else
-            return redirect()->route('login');
+            return redirect()->route('login_form');
     }
 }

@@ -19,14 +19,18 @@ class LoginCustom extends Controller
     {
         $user=User::where('login',$request->input('login'))->first();
 
-        if($user!=null)
+        //Если есть такой юзер
+        if($user!=null && $user->active)
         {
+            //Проверяем пароль
             if(\Hash::check($request->input('password'),$user->password))
             {
+                //Авторизируемся
                 Auth::loginUsingId($user->id);
                 return redirect('/');
             }
-        }
+        }else
+            return redirect()->back();
 
         return redirect()->back()
             ->withInput($request->only('login'))

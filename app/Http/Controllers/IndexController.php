@@ -18,10 +18,7 @@ class IndexController extends Controller
     public function index()
     {
         $count_theme=All_themes::where('use_theme',true)->first();
-//        dd($count_theme);
-        if(!$count_theme==null)
-            return view('null_template.null_template');
-        else
-            return redirect()->route('homeUser');
+        if($count_theme==null)
+            return view('system.null_template.null_template');
     }
 }

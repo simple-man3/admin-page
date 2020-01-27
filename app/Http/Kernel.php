@@ -65,7 +65,8 @@ class Kernel extends HttpKernel
         'auth_admin_page'=>\App\Http\Middleware\AuthAdminPage::class,
         'validationMiddleware'=>\App\Http\Middleware\ValidationMiddleware::class,
         'loginCustom'=>\App\Http\Middleware\System\AuthCustom\LoginCustom::class,
-        'registrationCustom'=>\App\Http\Middleware\System\AuthCustom\RegistrationCustom::class
+        'registrationCustom'=>\App\Http\Middleware\System\AuthCustom\RegistrationCustom::class,
+        'nullTemplateMiddleware'=>\App\Http\Middleware\System\NullTemplate\MiddleWareNullTemplate::class,
     ];
 
     /**

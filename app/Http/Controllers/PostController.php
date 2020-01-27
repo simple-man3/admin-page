@@ -35,7 +35,7 @@ class PostController extends Controller
 //        $posts->setCollection($postsItems); // TODO find better solution
 
 
-        return view(Helper::usingTheme('posts.index'));
+//        return view(Helper::usingTheme('posts.index'));
     }
 
     /**

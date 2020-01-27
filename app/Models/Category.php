@@ -16,5 +16,5 @@ class Category extends Model
         return $this->belongsToMany(User::class);
     }
 
-    protected $fillable=['name','active'];
+    protected $fillable=['name','active','user_id'];
 }

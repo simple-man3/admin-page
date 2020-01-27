@@ -66,6 +66,7 @@ ul{
     height: 360px;
     background-color: #343a40;
     padding: 48px;
+    border-radius: 5px;
 }
 
 .wrap_carousel_title p{
@@ -85,3 +86,44 @@ ul{
     color: white;
 }
 /*endregion*/
+
+/*region Два блока под постером*/
+.wrap_block_under_poster{
+    /*padding: 24px;*/
+    min-height: 248px;
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
+    border: 1px solid #dee2e6!important;
+}
+
+.title_shit{
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.col_block_under_poster{
+    padding: 24px;
+    height: 248px;
+}
+
+.col_block_under_poster_another{
+    background-color: #55595c;
+    color: white;
+}
+
+.wrap_title{
+    margin-top: 50px;
+    margin-bottom: 25px;
+}
+
+.wrap_content_help{
+    margin-bottom: 30px;
+}
+/*endregion*/
+
+/*region footer*/
+.footer_my_temp{
+    height: 144px;
+    background-color: #f9f9f9;
+    border-top: .05rem solid #e5e5e5;
+}
+/*endegion*/

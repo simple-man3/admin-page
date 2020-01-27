@@ -1,18 +1,29 @@
 $(document).ready(function () {
 
+    // region стрелка в подменю, после загрузки dom дерева в админке
     window.onload=function () {
+        //После отображения страницы идет проверка
+        //Если Выбран подпунк в пункте "Контент", то стрелка смотит вверх
         if($('.spisok_admin_content').hasClass('display_submenu_admin_content'))
         {
             $('.link_admin_page_content').addClass('admin_content_click');
         }
     };
+    //endregion
+
+    //После отображения страницы идет проверка
+    //Если Выбран подпунк в пункте "Политика безопасности", то стрелка смотит вверх
+    if($('.list_user').hasClass('font_color') || $('.list_roles').hasClass('font_color'))
+    {
+        $('.link_admin_page_security').addClass('js_arrow_up');
+    }
 
     if($('.link_admin_page_content').hasClass('admin_content_click'))
     {
         $('.link_admin_page_content').removeClass('admin_content_click');
     }
 
-    // Стрелка в пункте Контент
+    //region Стрелка в пункте Контент
     $('.admin_content').click(function () {
         if(!$(this).hasClass('admin_content_click'))
         {
@@ -25,12 +36,29 @@ $(document).ready(function () {
             $('.spisok_admin_content').removeClass('display_submenu_admin_content');
         }
     });
+    // endregion
 
-    //При нажатии на кнопку "Добавить категорию, она становится неактивной"
+    // region Security
+    $('.link_admin_page_security').click(function () {
+        if($(this).hasClass('js_arrow_up'))
+        {
+            $(this).removeClass('js_arrow_up');
+            $('.submenu_security_ul').removeClass('display_submenu_security_ul')
+        }
+        else
+        {
+            $(this).addClass('js_arrow_up');
+            $('.submenu_security_ul').addClass('display_submenu_security_ul')
+        }
+    });
+    //endregion
+
+    //region При нажатии на кнопку "Добавить категорию, она становится неактивной"
     $('.btn_category').click(function () {
         $('.wrap_ajax_form').addClass('display_form');
         $(this).addClass('btn_disapled');
     });
+    //endregion
 
     // region редактор записей
     ClassicEditor
@@ -40,7 +68,7 @@ $(document).ready(function () {
     } );
     // endregion
 
-    //При нажатии на главную checkbox, отсальные checkbox тоже отмечаются
+    //region При нажатии на главную checkbox, отсальные checkbox тоже отмечаются
     $('.main_checkbox_admin_page').click(function () {
         if($(this).prop('checked'))
         {
@@ -51,8 +79,9 @@ $(document).ready(function () {
             $('.disapled_two_tags').css('display','block');
         }
     });
+    // endregion
 
-    // Если нажат хотя бы один checkbox, то можно выбирать действия
+    //region Если нажат хотя бы один checkbox, то можно выбирать действия
     $('.row_checkbox').click(function () {
         var variable=each_check();
         if(variable)
@@ -71,9 +100,11 @@ $(document).ready(function () {
 
         return i;
     }
+    //endregion
 
-    //Если chebox нажат и действие выбрано, то появляется кнопка "Применить"
+    //region Если chebox нажат и действие выбрано, то появляется кнопка "Применить"
     $('.select').change(function () {
         $('.input_tag').css('display','block');
     });
+    //endregion
 });

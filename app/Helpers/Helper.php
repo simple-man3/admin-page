@@ -28,7 +28,8 @@ class Helper
                              <link rel="stylesheet" href='.asset('system/css/style.css').'>',
 
             'script_app'=>'<script src='.asset('system/js/app.js').'></script>
-                           <script src='.asset('system/js/systems_script.js').'></script>',
+                           <script src='.asset('system/js/systems_script.js').'></script>
+                           <script src='.asset('system/lib/ckeditor.js').'></script>',
         );
 
         return $arLink['system_style'].$arLink['script_app'];
@@ -45,7 +46,6 @@ class Helper
      *
      * header - фалй (header.blade.php)
      */
-
     public static function usingTheme($location_file)
     {
         $using_theme=All_themes::where('use_theme',1)->first();
@@ -56,15 +56,28 @@ class Helper
     }
 
     /**
+     * Данная хелпер функция отображает админ панель в шапке сайта
+     *
+     * Пример:
+     * @include(\App\Helpers\Helper::getAdminMenu())
+     */
+    public static function getAdminMenu()
+    {
+        return "system.admin_page.head_admin_menu";
+    }
+
+    /**
      * Возвращает список контента, в зависимости от того, какие параметры юзер передал ('category') и ('paginate')
      * 'category' - передается id категории (необходимый параметр)
      * 'paginate' - передается пагинация, т.е. сколько отображать выводимых элементов (опциональный параметр)
-
+     * 'take' - сколько элементов отобразить
+     *
      * Пример:
 
      * Helper::getListContent(array(
      *       'category'=>34,
-     *       'paginate'=>5
+     *       'paginate'=>5,
+     *       'take'=>10
      *  ));
 
      */
@@ -73,8 +86,15 @@ class Helper
         //Если задан главный параметр 'category'
         if(array_key_exists('category',$arStr))
         {
-            //Если юзер указал 'paginate', то выполняется данное условие
-            if(array_key_exists('paginate',$arStr))
+            //Если указано и 'paginate' и 'take'
+            if(array_key_exists('paginate',$arStr) && array_key_exists('take',$arStr))
+            {
+                $aRSelect_content=Category::find($arStr['category'])->first()->content()->limit(3)->paginate(2);
+//                $aRSelect_content=Category::find($arStr['category'])->first()->content()->take($arStr['take'])->paginate($arStr['paginate']);
+//                dd($aRSelect_content);
+            }
+            //Если юзер указал ещё только 'paginate', то выполняется данное условие
+            else if(array_key_exists('paginate',$arStr))
             {
                 $aRSelected_category = Category::where('id',$arStr['category'])->
                 where('active',1)->
@@ -89,11 +109,16 @@ class Helper
                 else
                     dump('getListContent() значение пусто!');
             }
+            //Если юзер укзал ещё только 'take', то выполняем это условие
+            else if(array_key_exists('take',$arStr))
+            {
+                $aRSelect_content = Category::where('id',$arStr['category'])->first()->content()->take($arStr['take'])->get();
+            }
             else
             {
                 $aRSelected_category=Category::where('id',$arStr['category'])->
-                where('active',1)->
-                first();
+                                                            where('active',1)->
+                                                            first();
 
                 //Если в полученной переменной $aRSelected_category не null,
                 // то ищем весь контент, который находится в выбранной категории
@@ -119,7 +144,6 @@ class Helper
      *         'paginate'=>5
      * ));
      */
-
     public static function getListCategories($arStr)
     {
         //Если юзер указал 'paginate', то выполняется данное условие
@@ -145,7 +169,6 @@ class Helper
      *         'content'=>23
      * ));
      */
-
     public static function getContent($arStr)
     {
         //Есть ли все необходимые параметры
@@ -166,6 +189,27 @@ class Helper
     }
 
     /**
+     * Данный хелпер возвращает конкретную категорию, которую юхер выбрал
+     * Пример:
+     * Helper::getCategory(array(
+     *          'category'=>2
+     * ));
+     *
+     * Параметры, передаваемые в функцию:
+     * category - id категории
+     */
+    public static function getCategory($array)
+    {
+        $arCatgory="";
+        if(array_key_exists('category',$array))
+        {
+            $arCatgory=Category::find($array['category']);
+        }
+
+        return $arCatgory;
+    }
+
+    /**
      * данная хелпер функция обрезает текст на столько указал юзер
      * пример:
      * Helper::cutText('какой то текст что откдуа в куда',6,'...')
@@ -178,7 +222,6 @@ class Helper
      * $number - сколько символов оставить (обязательно)
      * $after - что подставить после обрезанного текст (опционально)
      */
-
     public static function cutText($str, $numer, $after=null)
     {
         $strResult=substr($str,0,$numer);
@@ -196,4 +239,13 @@ class Helper
      * Но с помощью функции хелпера можно просто написать так:
      * @extends(Helper::usingTheme('header'))
      */
+
+    /**
+     * данный хелпер получает коллекцию от хелпер функции "getCategory"
+     * и выводит весь контент выбранной категории
+     */
+    protected static function ggg($arStr)
+    {
+        dd($arStr);
+    }
 }

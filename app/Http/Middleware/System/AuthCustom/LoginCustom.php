@@ -17,10 +17,14 @@ class LoginCustom
     public function handle($request, Closure $next)
     {
         //Если юзер уже авторизован, то неследует снова авторизироваться
-        if(\Route::currentRouteName()=='login_form' && \Auth::check())
+        if(User::count()>0)
         {
-            return redirect('/');
-        }
+            if(\Route::currentRouteName()=='login_form' && \Auth::check())
+            {
+                return redirect('/');
+            }
+        }else
+            return redirect()->route('displayRegistrationForm');
         return $next($request);
     }
 }

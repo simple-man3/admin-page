@@ -154,6 +154,9 @@ return [
         ],
         'name_category'=>[
             'required'=>'Введите название категории!'
+        ],
+        'name_role'=>[
+            'required'=>'Введите роль!'
         ]
     ],
 

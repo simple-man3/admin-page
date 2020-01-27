@@ -10,12 +10,11 @@
     {!! \App\Helpers\Helper::systemSet() !!}
     {{--User style--}}
     <link rel="stylesheet" href="{{asset('css/user_style.css')}}">
-    <link rel="stylesheet" href="{{assert('css/bootstrap.css')}}">
 
 </head>
 <body>
 
-@include('admin_page.head_admin_menu')
+@include(\App\Helpers\Helper::getAdminMenu())
 
 @yield('content')
 

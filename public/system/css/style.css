@@ -86,6 +86,8 @@ body{
     background-position: center;
     background-size: contain;
 }
+
+
 /*endregion*/
 
 /*region home*/
@@ -115,7 +117,7 @@ body{
     opacity: 0;
     margin-top: 0;
     margin-bottom: 0!important;
-    margin-left: 60px;
+    margin-left: 46px;
     transition: .3s;
     cursor: pointer;
 }
@@ -131,6 +133,9 @@ body{
 .add_content_from input{
     width: 100%;
     border: 1px solid #c4c4c4;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 5px;
 }
 
 .ck.ck-editor__main>.ck-editor__editable:not(.ck-focused){
@@ -246,6 +251,10 @@ body{
 
 .wrap_ajax_form input[type='text']{
     height: 41px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border: 1px solid #c4c4c4;
+    border-radius: 5px;
 }
 
 .wrap_ajax_form input[type='submit']{
@@ -262,6 +271,11 @@ body{
     border-radius: 5px;
     padding: 18px;
     box-shadow: 0px 0px 34px -12px rgba(0,0,0,0.75);
+}
+
+.bg_detail input[type="password"]{
+    padding-right: 5px;
+    padding-left: 5px;
 }
 
 .wrap_title_detail p{
@@ -463,7 +477,8 @@ body{
 }
 
 .form_user input[type='text']{
-    padding-left: 4px;
+    padding-left: 5px;
+    padding-right: 5px;
     border-radius: 5px;
     border: 1px solid #d1d1d1;
 }
@@ -478,9 +493,13 @@ body{
 }
 
 .submenu_security_ul{
-    margin-bottom: 10px;
-    margin-left: 60px;
+    margin-left: 42px;
     margin-top: 0;
+    padding-left: 5px;
+    padding-right: 5px;
+    transition: .3s;
+    height: 0;
+    opacity: 0;
 }
 
 .submenu_security_ul a{
@@ -506,6 +525,8 @@ body{
 .wrap_choose_role select{
     width: 100%;
 }
+
+
 /*endregion*/
 
 /*region setting*/
@@ -17679,6 +17700,16 @@ h3 {
     background-color: #777c81;
     border-color: #777c81;
 }
+
+.display_submenu_security_ul{
+    height: 51px;
+    opacity: 1;
+    margin-bottom: 0;
+}
+
+.js_arrow_up:after{
+    transform: rotate(180deg);
+}
 /*endregion*/
 
 /*region route*/
@@ -17732,6 +17763,14 @@ h3 {
     justify-content: center;
     padding-top: 20px;
     color: red;
+}
+/*endregion*/
+
+/*region media*/
+@media (max-width: 1999px) {
+    .admin_account:after, .admin_content:after{
+        right: 8%;
+    }
 }
 /*endregion*/
 
