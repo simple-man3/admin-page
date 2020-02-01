@@ -2,6 +2,8 @@
 
 @section('title','Настройки press-start-cms')
 
+@section('title','Настройки press-start-cms')
+
 @section('admin_setting')
     <p>
         Выбор тем
