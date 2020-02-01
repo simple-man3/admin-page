@@ -82,7 +82,9 @@ class AdminContent extends Controller
             foreach ($all_dir_in_template as $user_template)
             {
                 //Проходит по всем найденным папкам и проверет на наличие неообходимых файлов
-                if (file_exists(resource_path('/views/template/' . $user_template . '/description.json')) && file_exists(public_path('/template/' . $user_template . '/screen.jpg')) && View::exists('template.' . $user_template . '.header')) {
+                if (file_exists(resource_path('/views/template/' . $user_template . '/description.json')) &&
+                    file_exists(public_path('/template/' . $user_template . '/public/screen.jpg')) &&
+                    View::exists('template.' . $user_template . '.header')) {
                     $json_data = json_decode(file_get_contents(resource_path("/views/template/" . $user_template . "/description.json")), true);
 
                     //Если в json есть необходимые поля
