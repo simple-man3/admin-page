@@ -39,7 +39,7 @@
                     Содержимое
                 </p>
                 <textarea name="content" id="editor" cols="30" rows="30"></textarea>
-                <input class="btn btn-primary" type="submit" value="Сохранить">
+                <input class="btn btn-primary btn_preloader" type="submit" value="Сохранить">
             </form>
         </div>
     </div>

@@ -79,7 +79,6 @@ body{
     height: 15px;
     width: 13px;
     transform: rotate(0deg);
-    /*left: 115px;*/
     right: 40px;
     top: 15px;
     transition: .5s;
@@ -87,7 +86,24 @@ body{
     background-size: contain;
 }
 
+.auth_user_icon{
+    position: relative;
+}
 
+.auth_user_icon:before{
+    content: "";
+    background-image: url('../img/another_img/user.svg');
+    position: absolute;
+    height: 16px;
+    left: -22px;
+    width: 15px;
+    top: 4px;
+}
+
+/*.auth_user_icon:before{*/
+/*    content: "";*/
+/*    background-image: url('../img/another_img/user.svg');*/
+/*}*/
 /*endregion*/
 
 /*region home*/
@@ -108,6 +124,13 @@ body{
 
 .selected_home_admin_page:before{
     background-image: url('../img/selected/home_admin_page.svg');
+}
+
+.wrap_list_home{
+    padding: 15px;
+    background: white;
+    box-shadow: 0px 0px 34px -12px rgba(0,0,0,0.75);
+    border-right: 5px;
 }
 /*endregion*/
 
@@ -231,6 +254,7 @@ body{
 
 .wrap_title_category{
     display: flex;
+    margin-bottom: 20px;
 }
 
 .wrap_title_category p{
@@ -312,6 +336,7 @@ body{
     padding: 15px;
     background: white;
     box-shadow: 0px 0px 34px -12px rgba(0,0,0,0.75);
+    border-radius: 5px;
 }
 
 .wrap_list_category p{
@@ -320,6 +345,7 @@ body{
 
 .just_wrap{
     display: flex;
+    margin-bottom: 20px;
 }
 
 .wrap_list_title{
@@ -524,6 +550,7 @@ body{
 
 .wrap_choose_role select{
     width: 100%;
+    background-color: white;
 }
 
 
@@ -17770,6 +17797,58 @@ h3 {
 @media (max-width: 1999px) {
     .admin_account:after, .admin_content:after{
         right: 8%;
+    }
+}
+/*endregion*/
+
+/*region preloader*/
+.bg_fix_preloader{
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 105vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: black;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.5;
+}
+
+.lds-ring {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+.lds-ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    margin: 8px;
+    border: 8px solid #fff;
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #fff transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+    animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+    animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+    animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
     }
 }
 /*endregion*/

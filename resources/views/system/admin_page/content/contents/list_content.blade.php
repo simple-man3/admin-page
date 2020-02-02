@@ -20,7 +20,7 @@
                     </div>
                     <div class="wrap_list_btn">
                         <a href="{{route('from_add_content',$id)}}">
-                            <input class="btn btn-primary" type="submit" value="Добавить контент">
+                            <input class="btn btn-primary btn_preloader" type="submit" value="Добавить элемент">
                         </a>
                     </div>
                 </div>

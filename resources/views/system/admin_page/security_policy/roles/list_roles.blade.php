@@ -41,7 +41,7 @@
                             display_form
                         @endif">
                         <input name="role_name" class="ajax_input" type="text" placeholder="название роли">
-                        <input class="btn btn-primary btn_ajax_catgory" type="submit" value="Добавить">
+                        <input class="btn btn-primary btn_ajax_catgory btn_preloader" type="submit" value="Добавить">
                     </div>
                 </form>
                 <div class="row col_list_category">

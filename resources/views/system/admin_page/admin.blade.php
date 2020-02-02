@@ -5,7 +5,7 @@
 @section('admin_page')
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-3 d-flex flex-row" style="padding: 0;">
+            <div class="col-md-2 d-flex flex-row" style="padding: 0;">
                 <div class="admin_sidebar_panel">
                     <ul>
                         <li>
@@ -98,7 +98,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-md-9">
+            <div class="col-md-10">
                 <div class="admin_another">
                     @yield('admin_main')
 
@@ -121,5 +121,10 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    {{--preloader--}}
+    <div class="bg_fix_preloader">
+        <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
     </div>
 @endsection

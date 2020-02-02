@@ -70,14 +70,14 @@ class Helper
      * Возвращает список контента, в зависимости от того, какие параметры юзер передал ('category') и ('paginate')
      * 'category' - передается id категории (необходимый параметр)
      * 'paginate' - передается пагинация, т.е. сколько отображать выводимых элементов (опциональный параметр)
-     * 'take' - сколько элементов отобразить
+     * 'orderBy' - сортировка (asc - по алфавиту), (desc - наоборот)
      *
      * Пример:
 
      * Helper::getListContent(array(
      *       'category'=>34,
      *       'paginate'=>5,
-     *       'take'=>10
+     *       'orderBy'=>'asc'
      *  ));
 
      */
@@ -86,19 +86,12 @@ class Helper
         //Если задан главный параметр 'category'
         if(array_key_exists('category',$arStr))
         {
-            //Если указано и 'paginate' и 'take'
-            if(array_key_exists('paginate',$arStr) && array_key_exists('take',$arStr))
-            {
-                $aRSelect_content=Category::find($arStr['category'])->first()->content()->limit(3)->paginate(2);
-//                $aRSelect_content=Category::find($arStr['category'])->first()->content()->take($arStr['take'])->paginate($arStr['paginate']);
-//                dd($aRSelect_content);
-            }
-            //Если юзер указал ещё только 'paginate', то выполняется данное условие
-            else if(array_key_exists('paginate',$arStr))
+            //Если юзер указал 'paginate', то выполняется данное условие
+            if(array_key_exists('paginate',$arStr))
             {
                 $aRSelected_category = Category::where('id',$arStr['category'])->
-                where('active',1)->
-                first();
+                                                              where('active',1)->
+                                                              first();
 
                 //Если в полученной переменной $aRSelected_category не null,
                 // то ищем весь контент, который находится в выбранной категории
@@ -110,10 +103,6 @@ class Helper
                     dump('getListContent() значение пусто!');
             }
             //Если юзер укзал ещё только 'take', то выполняем это условие
-            else if(array_key_exists('take',$arStr))
-            {
-                $aRSelect_content = Category::where('id',$arStr['category'])->first()->content()->take($arStr['take'])->get();
-            }
             else
             {
                 $aRSelected_category=Category::where('id',$arStr['category'])->
@@ -172,8 +161,8 @@ class Helper
     public static function getContent($arStr)
     {
         //Есть ли все необходимые параметры
-        $arSelectCategory="";
-        $arSelectContent="";
+        $arSelectCategory=null;
+        $arSelectContent=null;
         if(array_key_exists('category',$arStr) && array_key_exists('content',$arStr))
         {
             $arSelectCategory=Category::where('id',$arStr['category'])->
@@ -200,10 +189,10 @@ class Helper
      */
     public static function getCategory($array)
     {
-        $arCatgory="";
+        $arCatgory=null;
         if(array_key_exists('category',$array))
         {
-            $arCatgory=Category::find($array['category']);
+            $arCatgory=Category::where('id',$array['category'])->where('active',1)->first();
         }
 
         return $arCatgory;
@@ -225,8 +214,10 @@ class Helper
     public static function cutText($str, $numer, $after=null)
     {
         $strResult=substr($str,0,$numer);
+        //Если юзер указал, что после обрезанного текста подставить
         if(isset($after))
         {
+            //Добвление чего-то после обрезанного текста
             $strResult.=$after;
         }
         return $strResult;
@@ -243,9 +234,19 @@ class Helper
     /**
      * данный хелпер получает коллекцию от хелпер функции "getCategory"
      * и выводит весь контент выбранной категории
+     * Пример:
+     * Helper::getContentFromCategory($var_a)
+     *
+     * $var_a - коллекция, из запроса "getCategory"
      */
-    protected static function ggg($arStr)
+    public static function getContentFromCategory($arStr)
     {
-        dd($arStr);
+        $arContent=null;
+        if($arStr!=null)
+        {
+            $arContent=$arStr->content()->where('active',true)->get();
+        }
+
+        return $arContent;
     }
 }

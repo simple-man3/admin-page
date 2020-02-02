@@ -11,17 +11,12 @@
                     <a class="a_content detail_content" href="{{route('list_content',$id)}}">
                         Контент
                     </a>
-                    <a class="a_detail" href="javascript:void(0)">
+                    <a class="a_detail a_content a_category" href="javascript:void(0)">
                         Редактирование
                     </a>
                     <a class="a_detail" href="javascript:void(0)">
                         {{$arContent->title}}
                     </a>
-                </div>
-                <div class="wrap_title_detail">
-                    <p>
-                        Редактирование: {{$arContent->title}}
-                    </p>
                 </div>
                 @if ($errors->any())
                     <div class="error_list">
@@ -74,7 +69,7 @@
                     <textarea name="content" id="editor">
                         {{old('content',$arContent->content)}}
                     </textarea>
-                    <input class="btn btn-primary" type="submit" value="Сохранить">
+                    <input class="btn btn-primary btn_preloader" type="submit" value="Сохранить">
                 </form>
             </div>
         </div>

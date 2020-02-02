@@ -59,7 +59,7 @@
                     </p>
                     <input name="name_category" type="text" value="{{old('name_category',$arCategory->name)}}">
                 </div>
-                <input class="btn btn-primary" type="submit" value="Сохранить">
+                <input class="btn btn-primary btn_preloader" type="submit" value="Сохранить">
             </form>
         </div>
     </div>

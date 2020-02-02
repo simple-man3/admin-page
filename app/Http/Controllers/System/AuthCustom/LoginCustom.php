@@ -17,20 +17,18 @@ class LoginCustom extends Controller
 
     public function loginUser(LoginRequest $request)
     {
+        $remeber=$request->has('remember');
         $user=User::where('login',$request->input('login'))->first();
 
-        //Если есть такой юзер
+        //проверяем, активен ли он
         if($user!=null && $user->active)
         {
-            //Проверяем пароль
-            if(\Hash::check($request->input('password'),$user->password))
+            //Проверяем, есть ли такой юзер
+            if (Auth::attempt($request->only(['login', 'password']),$remeber))
             {
-                //Авторизируемся
-                Auth::loginUsingId($user->id);
                 return redirect('/');
             }
-        }else
-            return redirect()->back();
+        }
 
         return redirect()->back()
             ->withInput($request->only('login'))

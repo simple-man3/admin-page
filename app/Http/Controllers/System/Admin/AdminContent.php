@@ -79,16 +79,19 @@ class AdminContent extends Controller
 
         //Если в папке "template" всё таки есть папки
         if (count($all_dir_in_template) > 0) {
-            foreach ($all_dir_in_template as $user_template) {
+            foreach ($all_dir_in_template as $user_template)
+            {
                 //Проходит по всем найденным папкам и проверет на наличие неообходимых файлов
                 if (file_exists(resource_path('/views/template/' . $user_template . '/description.json')) && file_exists(public_path('/template/' . $user_template . '/screen.jpg')) && View::exists('template.' . $user_template . '.header')) {
                     $json_data = json_decode(file_get_contents(resource_path("/views/template/" . $user_template . "/description.json")), true);
 
                     //Если в json есть необходимые поля
-                    if (array_key_exists('theme', $json_data) && array_key_exists('author', $json_data) && array_key_exists('desc', $json_data)) {
+                    if (array_key_exists('theme', $json_data) && array_key_exists('author', $json_data) && array_key_exists('desc', $json_data))
+                    {
                         //Проевряет на наличие уже созданной строки в таблице по аттрибуту "name_dir"
                         $all_theme = All_themes::where('name_dir', $user_template)->first();
-                        if ($all_theme == null) {
+                        if ($all_theme == null)
+                        {
                             //Если нет такой темы, то записывается в таблицу
                             $all_theme = new All_themes;
                             $all_theme->name_dir = $user_template;
@@ -98,7 +101,9 @@ class AdminContent extends Controller
                             $all_theme->use_theme = false;
 
                             $all_theme->save();
-                        } else {
+                        }
+                        else
+                        {
                             //Если есть такая тема, то обновляет данные в таблице
                             All_themes::where('id', $all_theme->id)->update([
                                 'name_theme' => $json_data['theme'],

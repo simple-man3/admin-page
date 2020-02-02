@@ -1,16 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 //region Если тема не выбрана
 
 //Если нет вообще шаблонов
@@ -98,6 +87,9 @@ Route::group(['prefix'=>'psc','middleware'=>'auth_admin_page','namespace'=>'Syst
         //Добавление нового юзера
         Route::post('/add_user_form/add',['uses'=>'SecurityPolicy@addUser','as'=>'add_user']);
 
+        //Отобразить юзера детально
+        Route::get('/detail/{id}',['uses'=>'SecurityPolicy@displayDetailUser','as'=>'detail_user']);
+
         //Изменение поля юзера
         Route::post('/update/{id}',['uses'=>'SecurityPolicy@updateUser','as'=>'update_user']);
 
@@ -122,9 +114,6 @@ Route::group(['prefix'=>'psc','middleware'=>'auth_admin_page','namespace'=>'Syst
 
         //Выбор действия из списка "Действия" для ролей
         Route::post('/action_role',['uses'=>'SecurityPolicy@actionRole','middleware'=>'validationMiddleware','as'=>'action_role']);
-
-        //Отобразить юзера детально
-        Route::get('/detail/{id}',['uses'=>'SecurityPolicy@displayDetailUser','as'=>'detail_user']);
 
         //endregion
     });

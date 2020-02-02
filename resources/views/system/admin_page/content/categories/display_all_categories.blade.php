@@ -38,7 +38,7 @@
                             display_form
                         @endif">
                         <input name="category_name" class="ajax_input" type="text" placeholder="название категории">
-                        <input class="btn btn-primary btn_ajax_catgory" type="submit" value="Добавить">
+                        <input class="btn btn-primary btn_ajax_catgory btn_preloader" type="submit" value="Добавить">
                     </div>
                 </form>
                 <div class="row col_list_category">
@@ -72,9 +72,9 @@
                                     <div class="col-1 list_category_tool">
                                         <input name="checkbox_{{$arItem->id}}" class="row_checkbox" type="checkbox">
                                     </div>
-                                    <div class="col-1 list_category_change_btn">
+                                    <div class="col-1 d-flex justify-content-start list_category_change_btn">
                                         <a href="{{route('update_category',$arItem->id)}}">
-                                            <img src="{{asset('system/img/another_img/change_btn.svg')}}" alt="change_btn">
+                                            <img class="btn_preloader" src="{{asset('system/img/another_img/change_btn.svg')}}" alt="change_btn">
                                         </a>
                                     </div>
                                     <div class="col-4 list_category_name">
@@ -117,7 +117,7 @@
                                             </select>
                                         </div>
                                         <div class="input_tag">
-                                            <input class="btn btn-primary" type="submit" value="ПРИМЕНИТЬ">
+                                            <input class="btn btn-primary btn_preloader" type="submit" value="ПРИМЕНИТЬ">
                                         </div>
                                     </div>
                                     <div class="disapled_two_tags"></div>

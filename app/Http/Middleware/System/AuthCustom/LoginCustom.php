@@ -16,15 +16,19 @@ class LoginCustom
      */
     public function handle($request, Closure $next)
     {
-        //Если юзер уже авторизован, то неследует снова авторизироваться
+        //После установки cms, в юзеру нужно зарегаться, чтобы в бд cms был хотя бы один юзер
+        //Идет проврека, есть ли в бд хотя бы один юзер в cms?
         if(User::count()>0)
         {
-            if(\Route::currentRouteName()=='login_form' && \Auth::check())
+            //Если юзер авторизован, то при попытке снова
+            // авторизироваться, его будет перекидывать на главную страницу
+            if(\Auth::check())
             {
                 return redirect('/');
             }
         }else
             return redirect()->route('displayRegistrationForm');
+
         return $next($request);
     }
 }

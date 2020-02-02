@@ -107,4 +107,10 @@ $(document).ready(function () {
         $('.input_tag').css('display','block');
     });
     //endregion
+
+    // region preloader
+    $('.btn_preloader').click(function () {
+        $('.bg_fix_preloader').css('display','flex');
+    });
+    // endregion
 });

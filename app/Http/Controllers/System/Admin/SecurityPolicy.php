@@ -98,6 +98,7 @@ class SecurityPolicy extends Controller
             'email' => $request->input('email'),
             'password' => \Hash::make($request->input('password')),
             'active' => 1,
+            'main_user' => false
         ]);
 
         return redirect()->route('admin_account');
@@ -107,6 +108,7 @@ class SecurityPolicy extends Controller
     {
         $arUser = User::find($id);
         $arRole = Role::all(['id', 'name']);
+
         return view('system.admin_page.security_policy.users.detail_user', compact('arUser', 'arRole'));
     }
 
@@ -154,7 +156,7 @@ class SecurityPolicy extends Controller
         //Костыль, но мне лень отслеживать изменение роли юзера
         $user = User::find($id);
         $role_id=Role::find($request->input('select_role'));
-        $user->roles()->detach($role_id);
+//        $user->roles()->detach($role_id);
         $user->roles()->sync($role_id);
 
         return redirect()->route('admin_account');

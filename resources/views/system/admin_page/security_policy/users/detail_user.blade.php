@@ -85,7 +85,11 @@
                             <p>
                                 Роль
                             </p>
-                            <select name="select_role">
+                            {{--
+                                Пользователю, которого указывали, при регистрации нельзя менять роль.
+                                Т.к. если ему поменять роль, то он не сможет заходить в админку.
+                            --}}
+                            <select name="select_role" @if($arUser->main_user) disabled @endif>
                                 <option selected disabled></option>
                                 @foreach($arRole as $arItem)
                                     {{--Чтобы выбранную роль отображалось в списке после загрузки DOM--}}

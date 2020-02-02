@@ -22,6 +22,7 @@ class RegistrationCustom extends Controller
         $user->email=$request->input('email');
         $user->password=\Hash::make($request->input('password'));
         $user->active=true;
+        $user->main_user=true;
         $user->save();
 
         $role=new Role();
@@ -29,8 +30,7 @@ class RegistrationCustom extends Controller
         $role->super_user=true;
         $role->save();
 
-        $max_id_user=User::max('id');
-        $user=User::find($max_id_user);
+        $user=User::find($user->id);
         $role_id=Role::max('id');
 
         $user->roles()->attach($role_id);

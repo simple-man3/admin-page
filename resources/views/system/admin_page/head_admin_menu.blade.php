@@ -1,5 +1,5 @@
 @if(Auth::check())
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
     <div class="container-fluid">
         @if(Gate::allows('select_role_user'))
             <div class="row">
@@ -12,12 +12,8 @@
             </div>
         @endif
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- Left Side Of Navbar -->
-
-            <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
-                <!-- Authentication Links -->
-                <li>
+                <li class="auth_user_icon">
                     <p style="margin-right: 20px">
                         Здравствуй, {{Auth::user()->login}}
                     </p>
