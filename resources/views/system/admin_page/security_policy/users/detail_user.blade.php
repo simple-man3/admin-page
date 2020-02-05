@@ -4,6 +4,7 @@
     <div class="row">
         <div class="col-12">
             <form class="form_user" method="post" action="{{route('update_user',$arUser->id)}}">
+                <input type="text" name="main_user" style="display: none" value="{{$arUser->main_user}}">
                 @csrf
                 <div class="row">
                     <div class="col-8">
@@ -50,8 +51,14 @@
                                 </p>
                                 <input type="checkbox" name="checkbox"
                                        @if($arUser->active)
-                                       checked
-                                    @endif>
+                                           checked
+                                        @endif
+
+                                        @if($arUser->main_user)
+                                            disabled
+                                            checked
+                                        @endif
+                                    >
                             </div>
                             <div class="wrap_login">
                                 <p>
@@ -77,7 +84,7 @@
                                 </p>
                                 <input name="password_confirmation" type="password">
                             </div>
-                            <input class="btn btn-primary" type="submit" value="Сохранить">
+                            <input class="btn btn-primary btn_preloader" type="submit" value="Сохранить">
                         </div>
                     </div>
                     <div class="col-4">

@@ -110,6 +110,7 @@ $(document).ready(function () {
 
     // region preloader
     $('.btn_preloader').click(function () {
+        $('body').css('overflow','hidden');
         $('.bg_fix_preloader').css('display','flex');
     });
     // endregion

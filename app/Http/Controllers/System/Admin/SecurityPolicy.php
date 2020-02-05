@@ -132,7 +132,7 @@ class SecurityPolicy extends Controller
         }
 
         //Если юзер нажал накнопку "Аквтивность"
-        if($request->has('checkbox'))
+        if($request->has('checkbox') || $request->input('main_user')==true)
         {
             //Юзер становится активным
             User::where('id',$id)->update([
@@ -140,7 +140,8 @@ class SecurityPolicy extends Controller
                 'email'=>$request->input('email'),
                 'active'=>true
             ]);
-        }else{
+        }
+        else{
             //Юзер становится неактивным
             User::where('id',$id)->update([
                 'login'=>$request->input('login'),
@@ -154,10 +155,15 @@ class SecurityPolicy extends Controller
         //В промежуточной таблице "role_user", удаляется строка
         //Отвечающая на назначение роли юзеру и заново создается
         //Костыль, но мне лень отслеживать изменение роли юзера
-        $user = User::find($id);
-        $role_id=Role::find($request->input('select_role'));
-//        $user->roles()->detach($role_id);
-        $user->roles()->sync($role_id);
+        if($request->has('select_role'))
+        {
+            $user = User::find($id);
+            $role_id=Role::find($request->input('select_role'));
+            $user->roles()->detach($role_id);
+            $user->roles()->sync($role_id);
+        }
+
+//        dd($request->all());
 
         return redirect()->route('admin_account');
     }

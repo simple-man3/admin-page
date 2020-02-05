@@ -31,7 +31,12 @@
 
     @yield('content')
 
+    {{--Если нет тем--}}
     @yield('null_template')
+
+    {{--установка бд--}}
+    @yield('installation')
+
 
     <!-- Plugins external assets -->
     {!! (new \App\Library\PluginManagers\ExternalAsset\ExternalAssetPluginManager)->renderInEdnOfBody() !!}

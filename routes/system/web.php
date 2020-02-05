@@ -1,9 +1,17 @@
 <?php
 
+//region Installation CMS
+
+Route::group(['prefix'=>'installation','namespace'=>'System\Installation'],function () {
+    Route::get('/',['uses'=>'InstallationCms@index','middleware'=>'installationCms','as'=>'displayInstallationForm']);
+    Route::post('/',['uses'=>'InstallationCms@setSettingDb','as'=>'setSettingDb']);
+});
+
+//endregion
+
 //region Если тема не выбрана
 
 //Если нет вообще шаблонов
-
 Route::get('/null', ['uses'=>'IndexController@index','as'=>'qwerty']);
 
 //endregion
@@ -126,6 +134,31 @@ Route::group(['prefix'=>'psc','middleware'=>'auth_admin_page','namespace'=>'Syst
     //endregion
 });
 //endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //region Хз что это
 

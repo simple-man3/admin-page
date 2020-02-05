@@ -93,6 +93,7 @@ body{
 .auth_user_icon:before{
     content: "";
     background-image: url('../img/another_img/user.svg');
+    background-size: contain;
     position: absolute;
     height: 16px;
     left: -22px;
@@ -17780,6 +17781,49 @@ h3 {
 
 .wrap_registration_form{
     padding: 1.25rem;
+}
+/*endregion*/
+
+/*region installation*/
+.input_installation p{
+    font-size: 16px;
+}
+
+.input_installation input[type='text']{
+    border-radius: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border: 1px solid #e7e8e8;
+    width: 275px;
+}
+
+.title_installation{
+    align-items: flex-end;
+}
+
+.title_installation p{
+    height: fit-content;
+}
+
+.input_installation>p{
+    margin: 0;
+    color: red;
+    font-size: 12px;
+}
+
+.wrap_error_installation{
+    height: 50px;
+    width: 280px;
+    background-color: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    margin-bottom: 30px;
+}
+
+.wrap_error_installation p{
+    color: white;
 }
 /*endregion*/
 

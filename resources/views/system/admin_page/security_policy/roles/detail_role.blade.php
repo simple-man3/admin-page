@@ -43,7 +43,7 @@
                         </p>
                         <input name="name_role" type="text" value="{{old('name_role',$role->name)}}">
                     </div>
-                    <input class="btn btn-primary" type="submit" value="Сохранить">
+                    <input class="btn btn-primary btn_preloader" type="submit" value="Сохранить">
                 </form>
             </div>
         </div>

@@ -73,4 +73,9 @@
             </div>
         </div>
     </div>
+
+    {{--preloader--}}
+    <div class="bg_fix_preloader">
+        <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+    </div>
 @endsection
