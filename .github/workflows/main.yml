@@ -35,4 +35,4 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: Application Log
-        path: storage/logs/laravel.log
+        path: storage/logs
