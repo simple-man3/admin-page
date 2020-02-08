@@ -31,9 +31,3 @@ jobs:
         DB_DATABASE: database/database.sqlite
         LOG_CHANNEL: single
       run: vendor/bin/phpunit
-      continue-on-error: true
-    - name: Save log file
-      uses: actions/upload-artifact@v1
-      with:
-        name: Application Log
-        path: storage/logs
