@@ -55,7 +55,8 @@ class InstallationTest extends TestCase
 
         $response = $this->get('/');
 
-        $response->assertOk();
+        $is_redirect_to_install = $response->isRedirect('/installation');
+        $this->assertFalse($is_redirect_to_install, 'Redirect to installation form when CMS is installed');
 
         // если до теста было установлено значение true - возвращаем его
         if ($shouldSetCmsInstalledToFalse == true) {

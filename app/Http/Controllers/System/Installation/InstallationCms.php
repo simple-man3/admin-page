@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\System\Installation;
 
 use App\Http\Requests\System\Installation\InstallationRequest;
+use App\Library\Common\Env;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -18,47 +19,32 @@ class InstallationCms extends Controller
 
     public function setSettingDb(InstallationRequest $request)
     {
-        try
-        {
-            //т.к. ларик не понял, что я изменил файл, я в ручную меняю доступ к бд, но только на один шаг
-            //после того, как я перезагружу файл или перейду на другую страницу, он поймет, что файл был изиенен
-            config(['database.connections.mysql.database'=>$request->input('name_db')]);
-            config(['database.connections.mysql.username'=>$request->input('login_db')]);
-            config(['database.connections.mysql.password'=>$request->input('password_db')]);
+        try {
+            $db_host = $request->input('db_host', env('DB_HOST', '127.0.0.1'));
+            $db_port = $request->input('db_port', env('DB_PORT', '3306'));
+            $db_database = $request->input('db_database', env('DB_DATABASE', 'press_start_cms'));
+            $db_username = $request->input('db_username', env('DB_USERNAME', 'root'));
+            $db_password = $request->input('db_password', env('DB_PASSWORD', ''));
 
-            //вызываю команду "php artisan migrate"
+            Env::set('DB_HOST', $db_host);
+            Env::set('DB_PORT', $db_port);
+            Env::set('DB_DATABASE', $db_database);
+            Env::set('DB_USERNAME', $db_username);
+            Env::set('DB_PASSWORD', $db_password);
+
+            config(['database.connections.mysql.host' => $db_host]);
+            config(['database.connections.mysql.port' => $db_port]);
+            config(['database.connections.mysql.database' => $db_database]);
+            config(['database.connections.mysql.username' => $db_username]);
+            config(['database.connections.mysql.password' => $db_password]);
+
             \Artisan::call('migrate');
-
-            //Получаю путь к файлу "config->database.php"
-            $file_path=App::configPath('database.php');
-
-            //получаю содержимое файла
-            $content=file_get_contents($file_path);
-
-            //Изменяю доступ к бд, а именно:
-            //Название бд
-            //Логин бд
-            $changed=str_ireplace(
-                array(
-                    "'database' => ''",
-                    "'username' => ''",
-                    "'password' => ''"
-                ),
-                array(
-                    "'database' => '".$request->input('name_db')."'",
-                    "'username' => '".$request->input('login_db')."'",
-                    "'password' => '".$request->input('password_db')."'"
-                ),$content);
-
-            //Перезаписываю файл
-            file_put_contents($file_path,$changed);
-        }catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             return redirect()->back()
-                             ->withInput($request->only('name_db'))
-                             ->withErrors([
-                                 'wrong_login_or_password'=>'логин или пароль непраильный!'
-                             ]);
+                ->withInput($request->all())
+                ->withErrors([
+                    'name_db' => ['логин или пароль непраильный!']
+                ]);
         }
 
         return redirect()->route('displayRegistrationForm');
