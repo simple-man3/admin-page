@@ -66,7 +66,7 @@
                                 </div>
                                 <div class="col-md-5 d-flex justify-content-end mb-2">
                                     <p>
-                                        Логин
+                                        Имя пользователя базы данных
                                     </p>
                                 </div>
                                 <div class="col-md-6 mb-2 input_installation">
