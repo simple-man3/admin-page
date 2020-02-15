@@ -4,11 +4,13 @@ namespace App\Http\Controllers\System\Installation;
 
 use App\Http\Requests\System\Installation\InstallationRequest;
 use App\Library\Common\Env;
+use App\Models\All_themes;
+use App\Models\SystemSettings;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\App;
-use PharIo\Manifest\Application;
+use Illuminate\Support\Facades\Log;
 
 class InstallationCms extends Controller
 {
@@ -39,14 +41,43 @@ class InstallationCms extends Controller
             config(['database.connections.mysql.password' => $db_password]);
 
             \Artisan::call('migrate');
+
+            $this->setDefaultTheme();
+
+            // добавление настройки в бд с пройденными шагами установки CMS
+            $install_setting = SystemSettings::firstOrNew(['name' => 'cms_installation']);
+            if (!empty($install_setting->value)) {
+                Log::notice('There was old installation settings', [
+                    'settings' => $install_setting->value,
+                ]);
+            }
+            $install_setting->value = [
+                'db_prepared' => true,     // шаг: подготовка базы данных
+                'admin_created' => false,  // шаг: регистрация администратора
+            ];
+            $install_setting->save();
         } catch (\Exception $e) {
             return redirect()->back()
                 ->withInput($request->all())
                 ->withErrors([
-                    'name_db' => ['логин или пароль непраильный!']
+                    'wrong_login_or_password' => ['логин или пароль непраильный!'],
                 ]);
         }
 
         return redirect()->route('displayRegistrationForm');
+    }
+
+    /**
+     * Создает в БД запись о теме по умолчанию
+     */
+    protected function setDefaultTheme()
+    {
+        All_themes::create([
+            'name_dir' => 'my_temp',
+            'name_theme' => 'Эта создана как полигон для custom_helper',
+            'name_author' => 'Влад разраб',
+            'description_theme' => 'В данной теме будет отображатся данные из админки с помощью custom_helper',
+            'use_theme' => 1,
+        ]);
     }
 }

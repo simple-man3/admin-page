@@ -85,5 +85,7 @@ class Kernel extends HttpKernel
         \Illuminate\Session\Middleware\AuthenticateSession::class,
         \Illuminate\Routing\Middleware\SubstituteBindings::class,
         \Illuminate\Auth\Middleware\Authorize::class,
+        \App\Http\Middleware\System\Installation\InstallationCms::class,
+        \App\Http\Middleware\System\NullTemplate\MiddleWareNullTemplate::class,
     ];
 }

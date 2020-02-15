@@ -24,8 +24,11 @@ class InstallationRequest extends FormRequest
     public function rules()
     {
         return [
-            'name_db'  => 'required',
-            'login_db'    => 'required'
+            'db_host'    => 'required',
+            'db_port'    => 'required',
+            'db_database'    => 'required',
+            'db_username'    => 'required',
+            'db_password'    => 'required',
         ];
     }
 }

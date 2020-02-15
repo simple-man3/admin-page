@@ -86,7 +86,7 @@
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <input name="db_password" type="text" class="input_installation"
-                                           value="{{old('db_username', env('DB_PASSWORD', ''))}}">
+                                           value="{{old('db_password', env('DB_PASSWORD', ''))}}">
                                 </div>
                             </div>
 
