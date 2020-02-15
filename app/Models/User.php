@@ -39,6 +39,16 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\User withTrashed()
  * @method static \Illuminate\Database\Query\Builder|\App\Models\User withoutTrashed()
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Category[] $category
+ * @property-read int|null $category_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Role[] $roles
+ * @property-read int|null $roles_count
+ * @property string $login
+ * @property int $active
+ * @property int $main_user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereLogin($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereMainUser($value)
  */
 class User extends Authenticatable
 {
