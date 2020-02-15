@@ -158,10 +158,10 @@ return [
         'name_role'=>[
             'required'=>'Введите роль!'
         ],
-        'name_db'=>[
+        'db_database'=>[
             'required'=>'Введите название базы данных!'
         ],
-        'login_db'=>[
+        'db_username'=>[
             'required'=>'Введите логин для доступа базы данных!'
         ],
         'password_db'=>[
