@@ -63,7 +63,11 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'platform.key' => \App\Http\Middleware\CheckPlatformKey::class,
         'auth_admin_page'=>\App\Http\Middleware\AuthAdminPage::class,
-        'validationMiddleware'=>\App\Http\Middleware\ValidationMiddleware::class
+        'validationMiddleware'=>\App\Http\Middleware\ValidationMiddleware::class,
+        'loginCustom'=>\App\Http\Middleware\System\AuthCustom\LoginCustom::class,
+        'registrationCustom'=>\App\Http\Middleware\System\AuthCustom\RegistrationCustom::class,
+        'nullTemplateMiddleware'=>\App\Http\Middleware\System\NullTemplate\MiddleWareNullTemplate::class,
+        'installationCms'=>\App\Http\Middleware\System\Installation\InstallationCms::class,
     ];
 
     /**
@@ -81,5 +85,7 @@ class Kernel extends HttpKernel
         \Illuminate\Session\Middleware\AuthenticateSession::class,
         \Illuminate\Routing\Middleware\SubstituteBindings::class,
         \Illuminate\Auth\Middleware\Authorize::class,
+        \App\Http\Middleware\System\Installation\InstallationCms::class,
+        \App\Http\Middleware\System\NullTemplate\MiddleWareNullTemplate::class,
     ];
 }

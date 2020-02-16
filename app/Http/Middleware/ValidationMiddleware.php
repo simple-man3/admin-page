@@ -16,12 +16,24 @@ class ValidationMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $validate=Validator::make($request->all('category_name'),[
-            'category_name'=>['required']
-        ],[
-            'category_name.required'=>'Введите название категории!'
+        if($request->has('category_name'))
+        {
+            $validate=Validator::make($request->all('category_name'),[
+                'category_name'=>['required']
+            ],[
+                'category_name.required'=>'Введите название категории!'
 
-        ])->validate();
+            ])->validate();
+        }
+        elseif ($request->has('role_name'))
+        {
+            $validate=Validator::make($request->all('role_name'),[
+                'role_name'=>['required']
+            ],[
+                'role_name.required'=>'Введите название роли!'
+
+            ])->validate();
+        }
 
         return $next($request);
     }

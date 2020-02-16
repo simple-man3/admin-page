@@ -1,0 +1,129 @@
+/*region default_set*/
+body{
+    margin: 0;
+    padding: 0;
+    background-color: white;
+}
+
+p{
+    margin: 0;
+    padding: 0;
+}
+
+ul{
+    padding: 0;
+}
+/*endregion*/
+
+/*region header*/
+.text_title{
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.top_subscribe{
+    color: #878f95;
+}
+
+.top_row{
+    border-bottom: 2px solid #f6f6f6;
+}
+
+.top_sign_up{
+    color: #6c757d;
+    border: 1px solid #6c757d;
+    padding: .25rem .5rem;
+    font-size: .875rem;
+    line-height: 1.5;
+    border-radius: .2rem;
+}
+/*endregion*/
+
+/*region menu*/
+.top_menu{
+    display: flex;
+}
+
+.top_menu li{
+    list-style-type: none;
+}
+
+.top_menu a{
+    color: #6c757d;
+}
+
+.nav_menu{
+    height: 44px;
+}
+
+.nav_menu a{
+    color: #6c757d;
+}
+/*endregion*/
+
+/*region Карусель*/
+.bg_carousel{
+    height: 360px;
+    background-color: #343a40;
+    padding: 48px;
+    border-radius: 5px;
+}
+
+.wrap_carousel_title p{
+    color: white;
+    font-size: 48px;
+    line-height: 45px;
+}
+
+.wrap_anons_text p{
+    color: white;
+    font-size: 20px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.wrap_anons_text a{
+    color: white;
+}
+/*endregion*/
+
+/*region Два блока под постером*/
+.wrap_block_under_poster{
+    /*padding: 24px;*/
+    min-height: 248px;
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
+    border: 1px solid #dee2e6!important;
+}
+
+.title_shit{
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.col_block_under_poster{
+    padding: 24px;
+    height: 248px;
+}
+
+.col_block_under_poster_another{
+    background-color: #55595c;
+    color: white;
+}
+
+.wrap_title{
+    margin-top: 50px;
+    margin-bottom: 25px;
+}
+
+.wrap_content_help{
+    margin-bottom: 30px;
+}
+/*endregion*/
+
+/*region footer*/
+.footer_my_temp{
+    height: 144px;
+    background-color: #f9f9f9;
+    border-top: .05rem solid #e5e5e5;
+}
+/*endegion*/

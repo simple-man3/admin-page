@@ -18,7 +18,6 @@ class AuthAdminPage
      */
     public function handle($request, Closure $next)
     {
-
         if(\Auth::check())
         {
             if(Gate::allows('select_role_user'))
@@ -29,6 +28,6 @@ class AuthAdminPage
                 return redirect()->back();
             }
         }else
-            return redirect()->route('login');
+            return redirect()->route('login_form');
     }
 }

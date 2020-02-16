@@ -26,18 +26,16 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('created_at', 'desc')->paginate(5);
-        $postsItems = collect($posts->items());
+//        $posts = Post::orderBy('created_at', 'desc')->paginate(5);
+//        $postsItems = collect($posts->items());
+//
+//        $postsItems->each(function ($item, $key) {
+//            $item->content = Str::limit($item->content, 1200);
+//        });
+//        $posts->setCollection($postsItems); // TODO find better solution
 
-        $postsItems->each(function ($item, $key) {
-            $item->content = Str::limit($item->content, 1200);
-        });
-        $posts->setCollection($postsItems); // TODO find better solution
 
-
-        return view(Helper::usingTheme().'posts.index',[
-            'posts' => $posts
-        ]);
+//        return view(Helper::usingTheme('posts.index'));
     }
 
     /**
