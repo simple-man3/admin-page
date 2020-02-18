@@ -13,8 +13,6 @@ class PostController extends Controller
 {
     public function index()
     {
-
-        dd();
         //Постер
         $arResult=Helper::getContent(array(
             'category'=>1,
