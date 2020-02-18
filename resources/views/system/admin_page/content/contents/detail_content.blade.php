@@ -49,7 +49,12 @@
                     </div>
                     <div class="user_creater detail_date_of_creation">
                         <p>
-                            Запись создана пользователем: {{$user->login}}
+                            Запись создана пользователем:
+                            @if(!empty($user->login))
+                                {{$user->login}}
+                            @else
+                                удален
+                            @endif
                         </p>
                     </div>
                     <div class="detail_date_of_creation">

@@ -18,8 +18,8 @@ class CreateCategoriesTable extends Migration
             $table->string('name');
             $table->boolean('active');
 
-            $table->bigInteger('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
+//            $table->bigInteger('user_id')->unsigned();
+//            $table->foreign('user_id')->references('id')->on('users');
 
             $table->timestamps();
         });

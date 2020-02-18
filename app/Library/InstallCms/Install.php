@@ -9,7 +9,7 @@ class Install
     public static function getAccessDb($key)
     {
         //Получаем путь до файла "db_access.json"
-        $path=static::getPath(0);
+        $path=static::getPath();
         $content = json_decode(file_get_contents($path), true);
 
         return $content[$key];
@@ -17,15 +17,17 @@ class Install
 
     public static function setAccessDb($new_request)
     {
+        config(['database.connections.mysql.host'=>$new_request['db_host']? $new_request['db_host']: '127.0.0.1']);
+        config(['database.connections.mysql.port'=>$new_request['db_port']? $new_request['db_port']: '3306']);
         config(['database.connections.mysql.database'=>$new_request['name_db']]);
         config(['database.connections.mysql.username'=>$new_request['login_db']]);
         config(['database.connections.mysql.password'=>$new_request['db_password']]);
 
         //Получаем путь до файла "db_access.json"
-        $path=static::getPath(0);
+        $path=static::getPath();
         $content = json_decode(file_get_contents($path), true);
 
-        $content['DB_HOST'] = key_exists('DB_HOST',$new_request)? $new_request['DB_HOST']: "127.0.0.1";
+        $content['DB_HOST'] = key_exists('DB_HOST',$new_request)? $new_request['db_host']: "127.0.0.1";
         $content['DB_PORT'] = key_exists('DB_PORT',$new_request)? $new_request['db_port']: "3306";
         $content['DB_DATABASE'] = $new_request['name_db'];
         $content['DB_USERNAME'] = $new_request['login_db'];
@@ -37,20 +39,9 @@ class Install
 
     /**
      * отображает путь до проекта
-     * @param $area_develop - если "false", то разработка происходит на локальном сервере, если "true", то на обычном сервере
-     * @return 'возвращает путь до файла access_db.json, в зависимости, что мы передали в метод'
      */
-    public static function getPath($area_develop)
+    public static function getPath()
     {
-        if($area_develop)
-        {
-            return $_SERVER['DOCUMENT_ROOT'] . '/db_access.json';
-        }else
-        {
-            $var_path=$_SERVER['DOCUMENT_ROOT'];
-            $new_var=explode("public",$var_path);
-
-            return $new_var[0].'db_access.json';
-        }
+        return base_path('db_access.json');
     }
 }

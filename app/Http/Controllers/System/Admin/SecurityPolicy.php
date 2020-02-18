@@ -207,7 +207,6 @@ class SecurityPolicy extends Controller
             {
                 //Ищет строку с заданным id в User
                 $user = User::find($arItem);
-//                dd($user->roles);
 
                 //Отображает все роли выбранного юзера
                 foreach ($user->roles as $value)
