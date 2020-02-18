@@ -10,7 +10,6 @@ class InstallationCms
 {
     public function handle($request, Closure $next)
     {
-        Install::getAccessDb('DB_HOST');
         //Получаем значение ключа "DB_INSTALLED"
         $check_installed_cms=Install::getAccessDb('DB_INSTALLED');
 
