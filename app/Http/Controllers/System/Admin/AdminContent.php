@@ -304,9 +304,6 @@ class AdminContent extends Controller
                 //Ищет строку с заданным id в Categories
                 $category = Category::find($arItem);
 
-//                dump($category->users);
-//                dd($category->content);
-
                 //Отображает весь контент в выбранной категории
                 foreach ($category->content as $value)
                 {
@@ -315,7 +312,6 @@ class AdminContent extends Controller
 
                     //Удаляет строку в таблице Content по заданному id
                     Content::destroy($value->id);
-
                 }
 
                 foreach ($category->users as $value)
@@ -323,6 +319,7 @@ class AdminContent extends Controller
                     //Удаляет все строки в связанной таблице "category_user"
                     $category->users()->detach($value->id);
                 }
+
                 //Удаляет строку в таблице Categories по заданному id
                 Category::destroy($arItem);
             }

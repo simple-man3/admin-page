@@ -1,8 +1,1 @@
-{
-    "DB_HOST":"",
-    "DB_PORT":"",
-    "DB_DATABASE":"",
-    "DB_USERNAME":"",
-    "DB_PASSWORD":null,
-    "DB_INSTALLED":false
-}
+{"DB_HOST":"127.0.0.1","DB_PORT":"3306","DB_DATABASE":"press_start_cms","DB_USERNAME":"homestead","DB_PASSWORD":"secret","DB_INSTALLED":true}

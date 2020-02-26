@@ -27,7 +27,7 @@ class SecurityPolicy extends Controller
     public function displayRoles()
     {
         $all_roles = Role::paginate(15);
-        return view('system.admin_page.security_policy.roles.list_roles', compact('all_roles', 'arErrors'));
+        return view('system.admin_page.security_policy.roles.list_roles', compact('all_roles'));
     }
 
     public function addRole(Request $request)
@@ -35,6 +35,13 @@ class SecurityPolicy extends Controller
         $role = new Role();
         $role->name = $request->input('role_name');
         $role->super_user = false;
+        $role->access_admin_page=true;
+        $role->access_content=true;
+        $role->access_security=true;
+        $role->access_setting=true;
+        $role->access_to_create=true;
+        $role->access_to_edit=true;
+        $role->access_to_delete=true;
         $role->save();
 
         return redirect()->route('all_roles');

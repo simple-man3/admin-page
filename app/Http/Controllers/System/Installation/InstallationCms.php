@@ -4,11 +4,7 @@ namespace App\Http\Controllers\System\Installation;
 
 use App\Http\Requests\System\Installation\InstallationRequest;
 use App\Library\InstallCms\Install;
-use App\Models\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\App;
-use PharIo\Manifest\Application;
 
 class InstallationCms extends Controller
 {
@@ -23,7 +19,7 @@ class InstallationCms extends Controller
         {
             Install::setAccessDb($request->except('_token'));
 
-            \Artisan::call('migrate');
+            Install::setDefaultTheme();
 
         }catch (\Exception $e)
         {

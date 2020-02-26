@@ -12,14 +12,14 @@ Route::group(['prefix'=>'installation','namespace'=>'System\Installation'],funct
 //region Если тема не выбрана
 
 //Если нет вообще шаблонов
-Route::get('/null', ['uses'=>'IndexController@index','as'=>'qwerty']);
+//Route::get('/null', ['uses'=>'IndexController@index','as'=>'qwerty']);
 
 //endregion
 
 //region AuthCustom
 
 //Регистрация юзера, кастомное (Просто нужно!)
-Route::group(['prefix'=>'/registration','namespace'=>'System\AuthCustom','middleware'=>'registrationCustom'],function (){
+Route::group(['prefix'=>'/registration_install','namespace'=>'System\AuthCustom','middleware'=>'registrationCustom'],function (){
     Route::get('/',['uses'=>'RegistrationCustom@index','as'=>'displayRegistrationForm']);
     Route::post('/add_user',['uses'=>'RegistrationCustom@registUser','as'=>'registUser']);
 });
