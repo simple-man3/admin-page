@@ -3,8 +3,8 @@
 //region Installation CMS
 
 Route::group(['prefix'=>'installation','namespace'=>'System\Installation'],function () {
-    Route::get('/',['uses'=>'InstallationCms@index','as'=>'displayInstallationForm']);
-    Route::post('/db-setup',['uses'=>'InstallationCms@setSettingDb','as'=>'setSettingDb']);
+    Route::get('/',['uses'=>'InstallationCms@index','middleware'=>'installationCms','as'=>'displayInstallationForm']);
+    Route::post('/',['uses'=>'InstallationCms@setSettingDb','as'=>'setSettingDb']);
 });
 
 //endregion
