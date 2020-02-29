@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\System\Admin;
 
 use App\Http\Requests\AddUserRequest;
-use App\Http\Requests\SecurityPolicy\UpdUser;
-use App\Http\Requests\System\Security\RoleRequest;
+use App\Http\Requests\System\Security\Role\AddRole;
+use App\Http\Requests\System\Security\User\UpdUser;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -30,19 +30,14 @@ class SecurityPolicy extends Controller
         return view('system.admin_page.security_policy.roles.list_roles', compact('all_roles'));
     }
 
-    public function addRole(Request $request)
+    public function displayFromAddRoles()
     {
-        $role = new Role();
-        $role->name = $request->input('role_name');
-        $role->super_user = false;
-        $role->access_admin_page=true;
-        $role->access_content=true;
-        $role->access_security=true;
-        $role->access_setting=true;
-        $role->access_to_create=true;
-        $role->access_to_edit=true;
-        $role->access_to_delete=true;
-        $role->save();
+        return view('system.admin_page.security_policy.roles.form_add_role');
+    }
+
+    public function addRole(AddRole $request)
+    {
+        Role::addNewRole($request->except('_token'));
 
         return redirect()->route('all_roles');
     }
@@ -88,11 +83,9 @@ class SecurityPolicy extends Controller
         return view('system.admin_page.security_policy.roles.detail_role', compact('role'));
     }
 
-    public function updateRole(RoleRequest $request, $id)
+    public function updateRole(AddRole $request, $id)
     {
-        Role::where('id', $id)->update([
-            'name' => $request->input('name_role')
-        ]);
+        Role::updRole($request->except('_token'),$id);
 
         return redirect()->route('all_roles');
     }

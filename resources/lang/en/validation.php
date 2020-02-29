@@ -155,8 +155,8 @@ return [
         'name_category'=>[
             'required'=>'Введите название категории!'
         ],
-        'name_role'=>[
-            'required'=>'Введите роль!'
+        'nameRole'=>[
+            'required'=>'Введите название роли!'
         ],
         'db_database'=>[
             'required'=>'Введите название базы данных!'
