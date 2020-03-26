@@ -40,5 +40,15 @@ class Category extends Model
         return $this->belongsToMany(User::class);
     }
 
-    protected $fillable=['name','active','user_id'];
+    public function parent_category()
+    {
+        return $this->belongsTo(Category::class,'parent_id');
+    }
+
+    public function sub_category()
+    {
+        return $this->hasMany(Category::class,'parent_id');
+    }
+
+    protected $fillable=['name','active','parent_id','user_id'];
 }

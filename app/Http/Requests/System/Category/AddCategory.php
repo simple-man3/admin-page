@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\System\Category;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-//class AddUserRequest extends FormRequest
-class AddUserRequest extends FormRequest
+class AddCategory extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,10 +24,7 @@ class AddUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'login'=>'required | unique:users',
-            'email'=>'required | email | unique:users',
-            'password'=>'required | confirmed | min:6',
-            'select_role'=>'required'
+            'name_category'=>'required'
         ];
     }
 }

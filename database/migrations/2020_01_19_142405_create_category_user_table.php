@@ -21,8 +21,6 @@ class CreateCategoryUserTable extends Migration
 
             $table->bigInteger('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('categories');
-
-            $table->timestamps();
         });
     }
 
