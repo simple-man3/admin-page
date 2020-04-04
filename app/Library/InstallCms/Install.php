@@ -78,6 +78,7 @@ class Install
         $user->password=\Hash::make($new_request['password']);
         $user->active=true;
         $user->main_user=true;
+
         $user->save();
 
         $role=new Role();
@@ -90,6 +91,7 @@ class Install
         $role->access_to_create=true;
         $role->access_to_edit=true;
         $role->access_to_delete=true;
+
         $role->save();
 
         $user=User::find($user->id);
@@ -126,12 +128,5 @@ class Install
         (4, 4, 4),
         (5, 4, 5),
         (6, 4, 6)');
-
-        //Вставка значений в таблицу "category_user"
-        DB::insert('INSERT INTO `category_user` (`id`, `user_id`, `category_id`) VALUES
-        (1, 1, 1),
-        (2, 1, 2),
-        (3, 1, 3),
-        (4, 1, 4)');
     }
 }

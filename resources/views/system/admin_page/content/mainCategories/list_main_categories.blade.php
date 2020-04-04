@@ -59,19 +59,19 @@
                     </div>
 
                     <div class="col-12">
-                        <form method="post" action="{{route('actionListCategories')}}">
+                        <form method="post" action="{{route('actionList')}}">
                             @csrf
                             @foreach($aRcategories as $arItem)
                                 <div class="row" style="display: flex;flex-wrap: wrap">
                                     <div class="col-1 list_category_tool">
-                                        <input name="checkbox_{{$arItem->id}}" class="row_checkbox" type="checkbox">
+                                        <input name="category_{{$arItem->id}}" class="row_checkbox" type="checkbox">
                                     </div>
                                     <div class="col-1 d-flex justify-content-center list_category_change_btn">
                                         <a href="{{route('update_category',$arItem->id)}}">
                                             <img class="btn_preloader" src="{{asset('system/img/another_img/pencil-edit.svg')}}" alt="change_btn">
                                         </a>
                                     </div>
-                                    <div class="col-4 list_category_name">
+                                    <div class="col-4 list_category_name categoryCol ">
                                         <a href="{{route('list_sub_content',$arItem->id)}}">
                                             {{$arItem->name}}
                                         </a>

@@ -20,6 +20,9 @@
                             <a href="{{route('fromAddCategory')}}">
                                 Добавить категорию
                             </a>
+                            <a href="{{route('from_add_content',$id)}}">
+                                Добавить контент
+                            </a>
                         </div>
                     @endif
                 </div>
@@ -97,18 +100,20 @@
                             @endforeach
 
                             <!--Отображает список контента-->
+
+                            <!--Отображение списка контента-->
                             @foreach($arContent as $arItem)
                                     <div class="row" style="display: flex;flex-wrap: wrap">
                                         <div class="col-1 list_category_tool">
                                             <input name="content_{{$arItem->id}}" class="row_checkbox" type="checkbox">
                                         </div>
                                         <div class="col-1 d-flex justify-content-center list_category_change_btn">
-                                            <a href="{{route('update_category',$arItem->id)}}">
+                                            <a href="{{route('detail_content',[$id,$arItem->id])}}">
                                                 <img class="btn_preloader" src="{{asset('system/img/another_img/pencil-edit.svg')}}" alt="change_btn">
                                             </a>
                                         </div>
                                         <div class="col-4 list_category_name">
-                                            <a href="{{route('list_sub_content',$arItem->id)}}">
+                                            <a href="{{route('detail_content',[$id,$arItem->id])}}">
                                                 {{$arItem->title}}
                                             </a>
                                         </div>
@@ -131,7 +136,7 @@
                                     </div>
                                 @endforeach
 
-                            @if($arSubCategory->count())
+                            @if($arSubCategory->count() || $arContent->count())
                                 <div class="col-12" style="padding: 0">
                                     <div class="two_tags">
                                         <div class="select_tag">

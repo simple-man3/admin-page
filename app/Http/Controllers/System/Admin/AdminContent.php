@@ -5,7 +5,7 @@ namespace App\Http\Controllers\System\Admin;
 use App\Http\Requests\System\Category\AddCategory;
 use App\Http\Requests\System\Category\UpdateCategory;
 use App\Http\Requests\ValidationRequest;
-use App\Library\ActionList\Action;
+use App\Library\ActionList\ActionContentPage;
 use App\Models\Category;
 use App\Models\Content;
 use App\Models\All_themes;
@@ -55,7 +55,7 @@ class AdminContent extends Controller
     public function displayFormUpdateCategory($id)
     {
         $arCategory=Category::find($id);
-        $arUser=$arCategory->users()->first();
+        $arUser=$arCategory->user;
 
         return view('system.admin_page.content.categories.detail_category',compact('arCategory','arUser'));
     }
@@ -176,12 +176,13 @@ class AdminContent extends Controller
     public function addCategory(AddCategory $request)
     {
         //Сохраняет новую категорию
-        Auth::user()->category()->create([
-            'name'=>$request->input('name_category'),
-            'active'=>true,
-            'parent_id'=>$request->has('parent_category')? $request->input('parent_category'):null,
-            'user_id'=>Auth::id()
-        ]);
+        $category=new Category();
+        $category->name=$request->input('name_category');
+        $category->active=true;
+        $category->parent_id=$request->input('parent_category');
+        $category->user_id=Auth::id();
+
+        $category->save();
 
         return redirect()->route('list_categories');
     }
@@ -212,7 +213,7 @@ class AdminContent extends Controller
         $arContent=Content::where('id',$idContent)->first();
 
         //Выбирает юзера, который создал данную запись
-        $user=$arContent->category()->first()->users()->first();
+        $user=$arContent->user;
 
         return view('system.admin_page.content.contents.detail_content',compact('arContent','id','user'));
     }
@@ -234,12 +235,12 @@ class AdminContent extends Controller
             ]);
         }
 
-        return redirect()->route('list_content',$idCategory);
+        return redirect()->route('list_sub_content',$idCategory);
     }
 
     public function actionList(Request $request)
     {
-        Action::actionList($request->except('_token'));
+        ActionContentPage::actionList($request->except('_token'));
 
         return redirect()->back();
     }

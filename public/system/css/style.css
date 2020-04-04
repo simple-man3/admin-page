@@ -484,6 +484,11 @@ body{
 
 .list_category_change_btn img{
     width: 20px;
+    transition: .2s;
+}
+
+.list_category_change_btn img:hover{
+    filter: brightness(0.5);
 }
 
 .wrapBtnAddCategoryOrContent  a{
